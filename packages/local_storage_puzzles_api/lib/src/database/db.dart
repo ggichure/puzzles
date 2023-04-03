@@ -4,12 +4,11 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:local_storage_puzzles_api/src/database/model_converters.dart';
 import 'package:local_storage_puzzles_api/src/database/tables.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:puzzles_api/puzzles_api.dart';
-
-import 'model_converters.dart';
 
 part 'db.g.dart';
 
@@ -49,7 +48,8 @@ class MyDatabase extends _$MyDatabase {
     );
   }
 
-  /// you should bump this number whenever you change or add a table definition. Migrations
+  /// you should bump this number whenever you change or add a table definition.
+  ///  Migrations
   /// are covered later in this readme.
   /// [schemaVersion] schemaVersion
   @override

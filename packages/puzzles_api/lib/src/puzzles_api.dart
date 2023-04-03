@@ -1,7 +1,8 @@
 import 'package:puzzles_api/src/models/models.dart';
 
 /// {@template puzzles_api}
-/// The interface and models for an API providing access to puzzles saved locally.
+/// The interface and models for an API providing access to puzzles saved
+///  locally.
 /// {@endtemplate}
 abstract class PuzzlesApi {
   /// {@macro puzzles_api}
