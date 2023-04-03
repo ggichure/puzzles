@@ -1,5 +1,5 @@
 name: puzzles
-description: puzzles for everyone 
+description: puzzles for everyone
 version: 1.0.0+1
 publish_to: none
 
@@ -14,6 +14,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
+  local_storage_puzzles_api:
+    path: packages/local_storage_puzzles_api
 
 dev_dependencies:
   bloc_test: ^9.1.1
