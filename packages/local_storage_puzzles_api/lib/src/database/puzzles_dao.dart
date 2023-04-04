@@ -7,13 +7,17 @@ import 'package:local_storage_puzzles_api/src/database/db.dart';
 /// [deletePuzzle] , [deletePuzzleItem], [deleteAllPuzzles]
 /// {@endtemplate}
 class PuzzlesDao extends MyDatabase {
+  /// {@template puzzles_getPuzzles}
   /// Provides a [Stream ] of all Puzzles
-  Stream<List<PuzzlesModelTableData>>? getPuzzles() async* {
+  /// {@endtemplate}
+  Stream<List<PuzzlesModelTableData>> getPuzzles() async* {
     yield* (select(puzzlesModelTable)).watch();
   }
 
+  /// {@template puzzles_getPuzzlesItems}
   /// Provides a [Stream ] of all Puzzles Items given [puzzleId]
-  Stream<List<PuzzlesItemsModelTableData>>? getPuzzlesItems(
+  /// {@endtemplate}
+  Stream<List<PuzzlesItemsModelTableData>> getPuzzlesItems(
     int puzzleId,
   ) async* {
     yield* (select(puzzlesItemsModelTable)
@@ -25,8 +29,10 @@ class PuzzlesDao extends MyDatabase {
         .watch();
   }
 
+  ///{@template puzzles_savePuzzle}
   /// used to store puzzles to drift db [PuzzlesModelTableData]
   /// can also double down as your update function
+  /// {@endtemplate}
   Future<void> savePuzzle(
     PuzzlesModelTableData? puzzlesModelTableData,
   ) async {
@@ -38,9 +44,11 @@ class PuzzlesDao extends MyDatabase {
     );
   }
 
+  /// {@template puzzles_deletePuzzle}
   /// used to delete puzzle given [puzzleId]
   ///
   /// It also deletes puzzle items
+  /// {@endtemplate}
   Future<void> deletePuzzle(
     int puzzleId,
   ) async {
@@ -62,7 +70,9 @@ class PuzzlesDao extends MyDatabase {
     });
   }
 
+  /// {@template puzzles_deleteAllPuzzles}
   /// used to clear entire database
+  /// {@endtemplate}
   Future<void> deleteAllPuzzles() async {
     return transaction(() async {
       // ignore: await_only_futures, avoid_single_cascade_in_expression_statements
@@ -72,7 +82,9 @@ class PuzzlesDao extends MyDatabase {
     });
   }
 
+  /// {@template puzzles_deletePuzzleItems}
   /// Delete puzzle item which matches id [puzzleItemId]
+  /// {@endtemplate}
   Future<void> deletePuzzleItem(
     int puzzleItemId,
   ) async {
@@ -83,7 +95,9 @@ class PuzzlesDao extends MyDatabase {
     );
   }
 
+  /// {@template puzzles_savePuzzleItems}
   /// used to save puzzle items to loacl db [PuzzlesItemsModelTableData]
+  /// {@endtemplate}
   Future<void> savePuzzleItems(
     PuzzlesItemsModelTableData? puzzlesItemsModelTableData,
   ) async {
