@@ -29,14 +29,7 @@ class PuzzlesItemModel extends Equatable {
     this.puzzleType,
     this.isCorrect,
     this.choices,
-  })  : assert(
-          id == null,
-          'id cannot be null',
-        ),
-        assert(
-          puzzleId == null,
-          'PuzzleId cannot be null',
-        );
+  });
 
   /// A list of the provided choices
   ///

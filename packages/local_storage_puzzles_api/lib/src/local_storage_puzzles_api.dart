@@ -40,9 +40,7 @@ class LocalStoragePuzzlesApi {
   }
 
   /// {@macro puzzles_deleteAllPuzzles}
-  Future<void> deleteAllPuzzles(
-    int puzzleItemId,
-  ) async {
+  Future<void> deleteAllPuzzles() async {
     return _puzzlesDao.deleteAllPuzzles();
   }
 
