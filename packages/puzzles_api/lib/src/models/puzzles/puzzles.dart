@@ -25,10 +25,7 @@ class PuzzlesModel extends Equatable {
     this.createdAt,
     this.completedAt,
     this.puzzleType,
-  }) : assert(
-          id == null,
-          'id cannot be null',
-        );
+  });
 
   /// The time the puzzle was ended
   ///
