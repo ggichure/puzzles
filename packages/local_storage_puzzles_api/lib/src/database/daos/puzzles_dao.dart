@@ -13,7 +13,7 @@ class PuzzlesDao extends DatabaseAccessor<MyDatabase> with _$PuzzlesDaoMixin {
   PuzzlesDao(super.db);
 
   /// Insert a PuzzlesModel object
-  Future<int> insertPuzzle(Puzzle puzzle) => into(puzzlesTable)
+  Future<void> insertPuzzle(Puzzle puzzle) => into(puzzlesTable)
       .insertOnConflictUpdate(PuzzlesTableData.fromJson(puzzle.toJson()));
 
   /// Update a Puzzle object
@@ -21,7 +21,7 @@ class PuzzlesDao extends DatabaseAccessor<MyDatabase> with _$PuzzlesDaoMixin {
       update(puzzlesTable).replace(PuzzlesTableData.fromJson(puzzle.toJson()));
 
   /// Delete a Puzzle object
-  Future<int> deletePuzzle(Puzzle puzzle) =>
+  Future<void> deletePuzzle(Puzzle puzzle) =>
       delete(puzzlesTable).delete(PuzzlesTableData.fromJson(puzzle.toJson()));
 
   /// Get all Puzzle objects
