@@ -8,8 +8,9 @@ part of 'puzzle_item.dart';
 
 PuzzleItem _$PuzzleItemFromJson(Map<String, dynamic> json) => PuzzleItem(
       id: json['id'] as int?,
-      puzzleId: json['puzzle_id'] as String?,
-      choices: json['choices'] as String?,
+      puzzleId: json['puzzle_id'] as int?,
+      choices:
+          (json['choices'] as List<dynamic>?)?.map((e) => e as String).toList(),
       puzzleType: json['puzzle_type'] as String?,
       createdAt: json['created_at'] as String?,
       completedAt: json['completed_at'] as String?,

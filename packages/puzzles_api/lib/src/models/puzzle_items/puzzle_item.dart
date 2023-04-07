@@ -35,10 +35,10 @@ class PuzzleItem extends Equatable {
 
   /// related puzzle primary key
   @JsonKey(name: 'puzzle_id')
-  final String? puzzleId;
+  final int? puzzleId;
 
   /// choices generated
-  final String? choices;
+  final List<String>? choices;
 
   /// Puzzle type can be xoxoxo,lts,etc
   @JsonKey(name: 'puzzle_type')
@@ -61,8 +61,8 @@ class PuzzleItem extends Equatable {
   /// {@macro puzzle_item}
   PuzzleItem copyWith({
     int? id,
-    String? puzzleId,
-    String? choices,
+    int? puzzleId,
+    List<String>? choices,
     String? puzzleType,
     String? createdAt,
     String? completedAt,
