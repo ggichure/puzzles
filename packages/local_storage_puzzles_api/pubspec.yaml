@@ -12,6 +12,7 @@ dependencies:
 
   flutter:
     sdk: flutter
+
   path: ^1.8.2
   path_provider: ^2.0.14
   puzzles_api:
@@ -22,5 +23,7 @@ dev_dependencies:
   drift_dev: ^2.6.0
   flutter_test:
     sdk: flutter
+  mockito: ^5.4.0
   mocktail: ^0.3.0
+
   very_good_analysis: ^3.1.0
