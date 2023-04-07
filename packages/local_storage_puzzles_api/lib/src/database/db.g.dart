@@ -39,9 +39,11 @@ class $PuzzlesItemTableTable extends PuzzlesItemTable
   static const VerificationMeta _choicesMeta =
       const VerificationMeta('choices');
   @override
-  late final GeneratedColumn<String> choices = GeneratedColumn<String>(
-      'choices', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+  late final GeneratedColumnWithTypeConverter<List<String>?, String> choices =
+      GeneratedColumn<String>('choices', aliasedName, true,
+              type: DriftSqlType.string, requiredDuringInsert: false)
+          .withConverter<List<String>?>(
+              $PuzzlesItemTableTable.$converterchoicesn);
   static const VerificationMeta _puzzleIdMeta =
       const VerificationMeta('puzzleId');
   @override
@@ -80,10 +82,7 @@ class $PuzzlesItemTableTable extends PuzzlesItemTable
           puzzleType.isAcceptableOrUnknown(
               data['puzzle_type']!, _puzzleTypeMeta));
     }
-    if (data.containsKey('choices')) {
-      context.handle(_choicesMeta,
-          choices.isAcceptableOrUnknown(data['choices']!, _choicesMeta));
-    }
+    context.handle(_choicesMeta, const VerificationResult.success());
     if (data.containsKey('puzzle_id')) {
       context.handle(_puzzleIdMeta,
           puzzleId.isAcceptableOrUnknown(data['puzzle_id']!, _puzzleIdMeta));
@@ -105,8 +104,9 @@ class $PuzzlesItemTableTable extends PuzzlesItemTable
           .read(DriftSqlType.string, data['${effectivePrefix}completed_at']),
       puzzleType: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}puzzle_type']),
-      choices: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}choices']),
+      choices: $PuzzlesItemTableTable.$converterchoicesn.fromSql(
+          attachedDatabase.typeMapping
+              .read(DriftSqlType.string, data['${effectivePrefix}choices'])),
       puzzleId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}puzzle_id']),
     );
@@ -116,6 +116,11 @@ class $PuzzlesItemTableTable extends PuzzlesItemTable
   $PuzzlesItemTableTable createAlias(String alias) {
     return $PuzzlesItemTableTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<List<String>, String> $converterchoices =
+      const ListStringConverter();
+  static TypeConverter<List<String>?, String?> $converterchoicesn =
+      NullAwareTypeConverter.wrap($converterchoices);
 }
 
 class PuzzlesItemTableData extends DataClass
@@ -124,7 +129,7 @@ class PuzzlesItemTableData extends DataClass
   final String? createdAt;
   final String? completedAt;
   final String? puzzleType;
-  final String? choices;
+  final List<String>? choices;
   final int? puzzleId;
   const PuzzlesItemTableData(
       {this.id,
@@ -149,7 +154,8 @@ class PuzzlesItemTableData extends DataClass
       map['puzzle_type'] = Variable<String>(puzzleType);
     }
     if (!nullToAbsent || choices != null) {
-      map['choices'] = Variable<String>(choices);
+      final converter = $PuzzlesItemTableTable.$converterchoicesn;
+      map['choices'] = Variable<String>(converter.toSql(choices));
     }
     if (!nullToAbsent || puzzleId != null) {
       map['puzzle_id'] = Variable<int>(puzzleId);
@@ -186,7 +192,7 @@ class PuzzlesItemTableData extends DataClass
       createdAt: serializer.fromJson<String?>(json['createdAt']),
       completedAt: serializer.fromJson<String?>(json['completedAt']),
       puzzleType: serializer.fromJson<String?>(json['puzzleType']),
-      choices: serializer.fromJson<String?>(json['choices']),
+      choices: serializer.fromJson<List<String>?>(json['choices']),
       puzzleId: serializer.fromJson<int?>(json['puzzleId']),
     );
   }
@@ -198,7 +204,7 @@ class PuzzlesItemTableData extends DataClass
       'createdAt': serializer.toJson<String?>(createdAt),
       'completedAt': serializer.toJson<String?>(completedAt),
       'puzzleType': serializer.toJson<String?>(puzzleType),
-      'choices': serializer.toJson<String?>(choices),
+      'choices': serializer.toJson<List<String>?>(choices),
       'puzzleId': serializer.toJson<int?>(puzzleId),
     };
   }
@@ -208,7 +214,7 @@ class PuzzlesItemTableData extends DataClass
           Value<String?> createdAt = const Value.absent(),
           Value<String?> completedAt = const Value.absent(),
           Value<String?> puzzleType = const Value.absent(),
-          Value<String?> choices = const Value.absent(),
+          Value<List<String>?> choices = const Value.absent(),
           Value<int?> puzzleId = const Value.absent()}) =>
       PuzzlesItemTableData(
         id: id.present ? id.value : this.id,
@@ -251,7 +257,7 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
   final Value<String?> createdAt;
   final Value<String?> completedAt;
   final Value<String?> puzzleType;
-  final Value<String?> choices;
+  final Value<List<String>?> choices;
   final Value<int?> puzzleId;
   const PuzzlesItemTableCompanion({
     this.id = const Value.absent(),
@@ -292,7 +298,7 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
       Value<String?>? createdAt,
       Value<String?>? completedAt,
       Value<String?>? puzzleType,
-      Value<String?>? choices,
+      Value<List<String>?>? choices,
       Value<int?>? puzzleId}) {
     return PuzzlesItemTableCompanion(
       id: id ?? this.id,
@@ -320,7 +326,8 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
       map['puzzle_type'] = Variable<String>(puzzleType.value);
     }
     if (choices.present) {
-      map['choices'] = Variable<String>(choices.value);
+      final converter = $PuzzlesItemTableTable.$converterchoicesn;
+      map['choices'] = Variable<String>(converter.toSql(choices.value));
     }
     if (puzzleId.present) {
       map['puzzle_id'] = Variable<int>(puzzleId.value);

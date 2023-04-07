@@ -64,3 +64,24 @@ class PuzzlesItemsModelConverter extends TypeConverter<PuzzleItem, String> {
     return json.encode(value.toJson());
   }
 }
+
+/// Custom converter for List<String>
+class ListStringConverter extends TypeConverter<List<String>, String> {
+  /// Custom converter for List<String>
+  const ListStringConverter();
+
+  @override
+  List<String> fromSql(String? fromDb) {
+    if (fromDb == null) return [];
+    final dynamic decoded = jsonDecode(fromDb);
+    if (decoded is List<dynamic>) {
+      return decoded.cast<String>();
+    }
+    return [];
+  }
+
+  @override
+  String toSql(List<String> value) {
+    return jsonEncode(value);
+  }
+}

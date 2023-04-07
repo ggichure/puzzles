@@ -4,6 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:local_storage_puzzles_api/src/database/daos/puzzle_items_dao.dart';
 import 'package:local_storage_puzzles_api/src/database/daos/puzzles_dao.dart';
+import 'package:local_storage_puzzles_api/src/database/model_converters.dart';
 import 'package:local_storage_puzzles_api/src/database/tables.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -30,8 +31,17 @@ LazyDatabase openConnection() {
 /// Our App database
 class MyDatabase extends _$MyDatabase {
   /// Our App database
-  MyDatabase() : super(openConnection());
+  MyDatabase([QueryExecutor? queryExecutor])
+      : super(queryExecutor ?? openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (m) {
+          return m.createAll();
+        },
+        onUpgrade: (Migrator m, int from, int to) async {},
+      );
 }
