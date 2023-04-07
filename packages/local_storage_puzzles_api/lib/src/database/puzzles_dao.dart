@@ -14,6 +14,22 @@ class PuzzlesDao extends MyDatabase {
     yield* (select(puzzlesModelTable)).watch();
   }
 
+  /// {@template puzzles_getPuzzleById}
+  /// Provides a [ Future ] of a Puzzle give an ID
+  /// {@endtemplate}
+  Future<PuzzlesModelTableData?> getPuzzleById(int id) async {
+    return (select(puzzlesModelTable)..where((tbl) => tbl.id.equals(id)))
+        .getSingleOrNull();
+  }
+
+  /// {@template puzzles_getPuzzleById}
+  /// Provides a [ Future ] of a Puzzle item give an ID
+  /// {@endtemplate}
+  Future<PuzzlesItemsModelTableData?> getPuzzleItemById(int id) async {
+    return (select(puzzlesItemsModelTable)..where((tbl) => tbl.id.equals(id)))
+        .getSingleOrNull();
+  }
+
   /// {@template puzzles_getPuzzlesItems}
   /// Provides a [Stream ] of all Puzzles Items given [puzzleId]
   /// {@endtemplate}
