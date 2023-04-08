@@ -189,11 +189,11 @@ class PuzzlesItemTableData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return PuzzlesItemTableData(
       id: serializer.fromJson<int?>(json['id']),
-      createdAt: serializer.fromJson<String?>(json['createdAt']),
-      completedAt: serializer.fromJson<String?>(json['completedAt']),
-      puzzleType: serializer.fromJson<String?>(json['puzzleType']),
+      createdAt: serializer.fromJson<String?>(json['created_at']),
+      completedAt: serializer.fromJson<String?>(json['completed_at']),
+      puzzleType: serializer.fromJson<String?>(json['puzzle_type']),
       choices: serializer.fromJson<List<String>?>(json['choices']),
-      puzzleId: serializer.fromJson<int?>(json['puzzleId']),
+      puzzleId: serializer.fromJson<int?>(json['puzzle_id']),
     );
   }
   @override
@@ -201,11 +201,11 @@ class PuzzlesItemTableData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int?>(id),
-      'createdAt': serializer.toJson<String?>(createdAt),
-      'completedAt': serializer.toJson<String?>(completedAt),
-      'puzzleType': serializer.toJson<String?>(puzzleType),
+      'created_at': serializer.toJson<String?>(createdAt),
+      'completed_at': serializer.toJson<String?>(completedAt),
+      'puzzle_type': serializer.toJson<String?>(puzzleType),
       'choices': serializer.toJson<List<String>?>(choices),
-      'puzzleId': serializer.toJson<int?>(puzzleId),
+      'puzzle_id': serializer.toJson<int?>(puzzleId),
     };
   }
 
@@ -485,9 +485,9 @@ class PuzzlesTableData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return PuzzlesTableData(
       id: serializer.fromJson<int?>(json['id']),
-      createdAt: serializer.fromJson<String?>(json['createdAt']),
-      completedAt: serializer.fromJson<String?>(json['completedAt']),
-      puzzleType: serializer.fromJson<String?>(json['puzzleType']),
+      createdAt: serializer.fromJson<String?>(json['created_at']),
+      completedAt: serializer.fromJson<String?>(json['completed_at']),
+      puzzleType: serializer.fromJson<String?>(json['puzzle_type']),
     );
   }
   @override
@@ -495,9 +495,9 @@ class PuzzlesTableData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int?>(id),
-      'createdAt': serializer.toJson<String?>(createdAt),
-      'completedAt': serializer.toJson<String?>(completedAt),
-      'puzzleType': serializer.toJson<String?>(puzzleType),
+      'created_at': serializer.toJson<String?>(createdAt),
+      'completed_at': serializer.toJson<String?>(completedAt),
+      'puzzle_type': serializer.toJson<String?>(puzzleType),
     };
   }
 

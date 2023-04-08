@@ -16,7 +16,8 @@ class PuzzlesItemDao extends DatabaseAccessor<MyDatabase>
   /// Insert a PuzzleItem object
   Future<void> insertPuzzleItem(PuzzleItem puzzleItem) =>
       into(puzzlesItemTable).insertOnConflictUpdate(
-          PuzzlesItemTableData.fromJson(puzzleItem.toJson()));
+        PuzzlesItemTableData.fromJson(puzzleItem.toJson()),
+      );
 
   /// Update a PuzzleItem object
   Future<void> updatePuzzleItem(PuzzleItem puzzleItem) =>
@@ -49,7 +50,7 @@ class PuzzlesItemDao extends DatabaseAccessor<MyDatabase>
   Future<PuzzleItem?>? getPuzzleItemById(int id) async {
     final puzzleItem = await (select(puzzlesItemTable)
           ..where((p) => p.id.equals(id)))
-        .getSingle();
-    return PuzzleItem.fromJson(puzzleItem.toJson());
+        .getSingleOrNull();
+    return puzzleItem != null ? PuzzleItem.fromJson(puzzleItem.toJson()) : null;
   }
 }
