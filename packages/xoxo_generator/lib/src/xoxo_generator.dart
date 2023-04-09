@@ -7,10 +7,12 @@ class XoxoGenerator {
   /// {@macro xoxo_generator}
   const XoxoGenerator();
 
+  /// {@template xoxo_randomXOXOGenerator}
   /// [randomXOXOGenerator] generates random [String]s of xoxo
   /// Using [Random] if even make words similar else switcharoo one letter
   ///
   /// [length] is used to count no of characters with 4 being min
+  /// {@endtemplate}
   Future<List<String>> randomXOXOGenerator(int? length) async {
     assert(length == null || length > 4, 'Length must be greater than 4');
 

@@ -5,6 +5,9 @@ publish_to: none
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
+dependencies:
+  xoxo_generator:
+    path: ../xoxo_generator
 
 dev_dependencies:
   mocktail: ^0.3.0
