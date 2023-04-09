@@ -1,4 +1,5 @@
-/// The interface and models for an API providing access to puzzles and puzzle items.
+/// The interface and models for an API providing access to puzzles and
+///  puzzle items.
 library puzzles_api;
 
 export 'src/models/models.dart';
