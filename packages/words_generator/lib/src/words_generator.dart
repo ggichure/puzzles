@@ -12,6 +12,8 @@ class WordsGenerator {
   ///
   /// [length] is used to count no of characters with 4 being min
   Future<List<String>> randomWordsGenerator(int? length) async {
+    assert(length == null || length > 4, 'Length must be greater than 4');
+
     final random = Random();
     if (random.nextInt(100).isEven) {
       final word1 = generateWord(length);
