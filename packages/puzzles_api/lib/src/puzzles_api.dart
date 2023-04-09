@@ -1,7 +1,8 @@
 import 'package:puzzles_api/src/models/models.dart';
 
 /// {@template puzzles_api}
-/// The interface and models for an API providing access to puzzles and puzzle items.
+/// The interface and models for an API providing access to puzzles and puzzle
+/// items.
 /// {@endtemplate}
 abstract class PuzzlesApi {
   /// {@macro puzzles_api}
@@ -43,7 +44,8 @@ abstract class PuzzlesApi {
 
   /// Deletes the `puzzleItem` with the given id.
   ///
-  /// If no `puzzleItem` with the given id exists, a [PuzzleItemNotFoundException] error is
+  /// If no `puzzleItem` with the given id exists, a
+  ///  [PuzzleItemNotFoundException] error is
   /// thrown.
   Future<void> deletePuzzleItem(int id);
 
@@ -57,7 +59,8 @@ abstract class PuzzlesApi {
 
   /// Get the `puzzleItem` with the given id.
   ///
-  /// If no `puzzleItem` with the given id exists, a [PuzzleItemNotFoundException] error is
+  /// If no `puzzleItem` with the given id exists, a
+  /// [PuzzleItemNotFoundException] error is
   /// thrown.
   Future<void> getPPuzzleItemById(int id);
 }

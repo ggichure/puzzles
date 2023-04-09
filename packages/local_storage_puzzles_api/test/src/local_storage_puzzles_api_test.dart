@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, flutter_style_todos
 
-import 'package:drift/drift.dart' as dr;
-import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_storage_puzzles_api/local_storage_puzzles_api.dart';
-import 'package:local_storage_puzzles_api/src/database/db.dart';
 import 'package:mockito/mockito.dart';
 import 'package:puzzles_api/puzzles_api.dart';
 
@@ -29,19 +26,22 @@ class MockLocalStoragePuzzlesApi extends Mock
 
   @override
   Future<List<PuzzleItem>?>? getAllPuzzlesItems(int id) {
-    // Fetch all puzzle items for the given puzzle ID from a mock local storage and return as a List<PuzzleItem>
+    // Fetch all puzzle items for the given puzzle ID from a mock local storage
+    // and return as a List<PuzzleItem>
     return Future.value([puzzleItem]);
   }
 
   @override
   Future<Puzzle?>? getPuzzleById(int id) {
-    // Fetch the puzzle with the given ID from a mock local storage and return as a Puzzle object
+    // Fetch the puzzle with the given ID from a mock local storage and return
+    //as a Puzzle object
     return Future.value(puzzle);
   }
 
   @override
   Future<PuzzleItem?>? getPuzzleItemById(int id) {
-    // Fetch the puzzle item with the given ID from a mock local storage and return as a PuzzleItem object
+    // Fetch the puzzle item with the given ID from a mock local storage and
+    //return as a PuzzleItem object
     return Future.value(puzzleItem);
   }
 
@@ -59,13 +59,15 @@ class MockLocalStoragePuzzlesApi extends Mock
 
   @override
   Stream<List<Puzzle>?>? streamAllPuzzles() {
-    // Stream all puzzles from a mock local storage and return as a Stream<List<Puzzle>>
+    // Stream all puzzles from a mock local storage and return as a
+    // Stream<List<Puzzle>>
     return Stream.value([]);
   }
 
   @override
   Stream<List<PuzzleItem>?>? streamAllPuzzlesItems(int id) {
-    // Stream all puzzle items for the given puzzle ID from a mock local storage and return as a Stream<List<PuzzleItem>>
+    // Stream all puzzle items for the given puzzle ID from a mock local
+    //storage and return as a Stream<List<PuzzleItem>>
     return Stream.value([puzzleItem]);
   }
 
@@ -97,6 +99,7 @@ final puzzleItem = PuzzleItem(
   completedAt: DateTime.november.toString(),
   choices: const ['Item 1'],
 );
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -119,7 +122,9 @@ void main() {
     final retrievedPuzzle = await localStoragePuzzlesApi.getPuzzleById(1);
     expect(retrievedPuzzle?.puzzleType, equals('Type 1'));
   });
-// TODO: test delete puzzle
+
+  // ignore: todo
+// TODO(deletePuzzle): test delete puzzle
   // test('Delete puzzle', () async {
   //   // Insert the puzzle into local storage
   //   await localStoragePuzzlesApi.insertPuzzle(puzzle);
@@ -155,13 +160,13 @@ void main() {
     await localStoragePuzzlesApi.insertPuzzle(puzzle);
 
     // Delay to allow time for the stream to emit the puzzle
+    // ignore: inference_failure_on_instance_creation
     await Future.delayed(Duration(seconds: 2));
 
     // Get the first emitted value from the stream
     final puzzles = await localStoragePuzzlesApi.getAllPuzzles();
 
     // Print the puzzles for debugging
-    print('puzzles: $puzzles');
 
     // Check the length of the puzzles list
     expect(puzzles?.length, equals(1));
