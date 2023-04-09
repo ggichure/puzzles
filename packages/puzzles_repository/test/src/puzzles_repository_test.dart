@@ -147,7 +147,7 @@ void main() {
     test('Test deletePuzzle', () async {
       await puzzlesRepository.insertPuzzle(puzzle);
       await puzzlesRepository.deletePuzzle(puzzle);
-      // ignore: flutter_style_todos
+
       // ignore: todo
       // TODO(assert): assert on delete
     });
