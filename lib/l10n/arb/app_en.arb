@@ -3,5 +3,25 @@
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
+    },
+    "puzzlesAppBarTitle": "Puzzles",
+    "@puzzlesAppBarTitle": {
+        "description": "Text shown in the AppBar of the Puzzles home Page"
+    },
+    "xoxoText": "XOXO",
+    "@xoxoText": {
+        "description": "Text shown when using xoxo puzzles"
+    },
+    "lettersText": "Letters",
+    "@lettersText": {
+        "description": "Text shown when using Letters puzzles"
+    },
+    "shapesText": "Shapes",
+    "@shapesText": {
+        "description": "Text shown when using Shapes puzzles"
+    },
+    "mixedPuzzlesText": "Mixed",
+    "@mixedPuzzlesText": {
+        "description": "Text shown when using Mixed puzzles"
     }
 }

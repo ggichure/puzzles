@@ -8,6 +8,7 @@ class PuzzlesTheme {
       ),
       colorScheme: ColorScheme.fromSwatch(
         accentColor: Colors.greenAccent,
+        primarySwatch: Colors.green,
       ),
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
@@ -23,6 +24,7 @@ class PuzzlesTheme {
       colorScheme: ColorScheme.fromSwatch(
         brightness: Brightness.dark,
         accentColor: Colors.greenAccent,
+        primarySwatch: Colors.green,
       ),
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
