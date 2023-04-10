@@ -44,7 +44,13 @@ class PuzzleTypeCard extends StatelessWidget {
             const SizedBox(
               height: 4,
             ),
-            if (asset?.isNotEmpty ?? false) SvgPicture.asset(asset!),
+            if (asset?.isNotEmpty ?? false)
+              SvgPicture.asset(
+                asset!,
+                height: kToolbarHeight,
+                width: kToolbarHeight,
+                color: Theme.of(context).primaryColor,
+              ),
             Text(
               '$title ${l10n.puzzlesAppBarTitle}',
               style: const TextStyle(fontSize: 20),
