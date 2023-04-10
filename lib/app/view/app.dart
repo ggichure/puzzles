@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:puzzles/counter/counter.dart';
 import 'package:puzzles/l10n/l10n.dart';
+import 'package:puzzles/theme/theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -8,12 +9,8 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
-        ),
-      ),
+      theme: PuzzlesTheme.light,
+      darkTheme: PuzzlesTheme.dark,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: const CounterPage(),
