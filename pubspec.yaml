@@ -28,7 +28,13 @@ dev_dependencies:
     sdk: flutter
   json_serializable: ^6.6.1
   mocktail: ^0.3.0
+  puzzles_api:
+    path: packages/puzzles_api
+  puzzles_repository:
+    path: packages/puzzles_repository
   very_good_analysis: ^4.0.0+1
+  words_generator_repository:
+    path: packages/words_generator_repository
 
 flutter:
   uses-material-design: true
