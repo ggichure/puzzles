@@ -1,1 +1,1 @@
-export 'puzzle_tye_card.dart';
+export 'puzzle_type_card.dart';

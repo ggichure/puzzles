@@ -18,6 +18,7 @@ class PuzzleTypeCard extends StatelessWidget {
     required this.title,
     this.asset,
     required this.puzzletype,
+    this.ontap,
   });
 
   /// [asset] an svg asset path else the title will be used
@@ -28,6 +29,9 @@ class PuzzleTypeCard extends StatelessWidget {
 
   /// [puzzletype] Used to identify type of puzzle when navigating
   final PUZZLETYPE puzzletype;
+
+  /// used to handle navigation
+  final Function()? ontap;
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -38,35 +42,38 @@ class PuzzleTypeCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Theme.of(context).primaryColor),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(4),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 4,
-            ),
-            if (asset?.isNotEmpty ?? false)
-              SvgPicture.asset(
-                asset!,
-                height: kToolbarHeight,
-                width: kToolbarHeight,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).indicatorColor,
-                  BlendMode.srcIn,
-                ),
-              ),
-            if (asset?.isNotEmpty ?? false)
+      child: GestureDetector(
+        onTap: ontap,
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Column(
+            children: [
               const SizedBox(
-                height: 8,
+                height: 4,
               ),
-            Text(
-              '$title ${l10n.puzzlesAppBarTitle}',
-              style: const TextStyle(fontSize: 20),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-          ],
+              if (asset?.isNotEmpty ?? false)
+                SvgPicture.asset(
+                  asset!,
+                  height: kToolbarHeight,
+                  width: kToolbarHeight,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).indicatorColor,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              if (asset?.isNotEmpty ?? false)
+                const SizedBox(
+                  height: 8,
+                ),
+              Text(
+                '$title ${l10n.puzzlesAppBarTitle}',
+                style: const TextStyle(fontSize: 20),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:puzzles/gen/assets.gen.dart';
 
 import 'package:puzzles/home/view/widgets/home_widgets.dart';
 import 'package:puzzles/l10n/l10n.dart';
 import 'package:puzzles/puzzles/puzzles.dart';
+import 'package:puzzles/router/app_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,6 +25,10 @@ class HomePage extends StatelessWidget {
             childAspectRatio: 1.7,
             children: [
               PuzzleTypeCard(
+                ontap: () {
+                  AutoRouter.of(context)
+                      .push(const LetterPuzzleConfigurePageRoute());
+                },
                 asset: Assets.svgs.letters,
                 title: l10n.lettersText,
                 puzzletype: PUZZLETYPE.letters,

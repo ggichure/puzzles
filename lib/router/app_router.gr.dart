@@ -23,7 +23,14 @@ class _$AppRouter extends RootStackRouter {
         child: const HomePage(),
         opaque: true,
       );
-    }
+    },
+    LetterPuzzleConfigurePageRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const LetterPuzzleConfigurePage(),
+        opaque: true,
+      );
+    },
   };
 
   @override
@@ -31,7 +38,11 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           HomePageRoute.name,
           path: '/',
-        )
+        ),
+        RouteConfig(
+          LetterPuzzleConfigurePageRoute.name,
+          path: '/letter-puzzle-configure-page',
+        ),
       ];
 }
 
@@ -45,4 +56,16 @@ class HomePageRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomePageRoute';
+}
+
+/// generated route for
+/// [LetterPuzzleConfigurePage]
+class LetterPuzzleConfigurePageRoute extends PageRouteInfo<void> {
+  const LetterPuzzleConfigurePageRoute()
+      : super(
+          LetterPuzzleConfigurePageRoute.name,
+          path: '/letter-puzzle-configure-page',
+        );
+
+  static const String name = 'LetterPuzzleConfigurePageRoute';
 }
