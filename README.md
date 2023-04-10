@@ -14,7 +14,7 @@ puzzles for everyone
 
 ## Screenshots
 
-<img src="./screenshots/ios1.png" alt="Home Page" width="300" height="200">
+<img src="./screenshots/ios1.png" alt="Home Page" width="700" height="200">
 
 ## Getting Started 🚀
 
