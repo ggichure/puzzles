@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:puzzles/counter/counter.dart';
+import 'package:puzzles/home/view/view.dart';
 import 'package:puzzles/l10n/l10n.dart';
 import 'package:puzzles/theme/theme.dart';
 
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
       darkTheme: PuzzlesTheme.dark,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const HomePage(),
     );
   }
 }
