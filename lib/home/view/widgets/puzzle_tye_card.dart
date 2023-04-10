@@ -31,14 +31,15 @@ class PuzzleTypeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return DecoratedBox(
+    return Container(
+      margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Theme.of(context).primaryColor),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(4),
         child: Column(
           children: [
             const SizedBox(
@@ -49,7 +50,14 @@ class PuzzleTypeCard extends StatelessWidget {
                 asset!,
                 height: kToolbarHeight,
                 width: kToolbarHeight,
-                color: Theme.of(context).primaryColor,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).indicatorColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+            if (asset?.isNotEmpty ?? false)
+              const SizedBox(
+                height: 8,
               ),
             Text(
               '$title ${l10n.puzzlesAppBarTitle}',
