@@ -9,7 +9,7 @@ abstract class PuzzlesApi {
   const PuzzlesApi();
 
   /// Provides a [Stream] of all puzzles.
-  Stream<List<Puzzle>>? streamPuzzles();
+  Stream<List<Puzzle>?>? streamAllPuzzles();
 
   /// Provides a [Stream] of all puzzleItems.
   Stream<List<PuzzleItem>>? streamPuzzleItems(int puzzleId);
@@ -17,7 +17,7 @@ abstract class PuzzlesApi {
   /// Saves a [puzzle].
   ///
   /// If a [puzzle] with the same id already exists, it will be replaced.
-  Future<void> savePuzzle(Puzzle puzzle);
+  Future<void> insertPuzzle(Puzzle puzzle);
 
   /// Saves a [puzzleItem].
   ///
@@ -40,14 +40,14 @@ abstract class PuzzlesApi {
   ///
   /// If no `puzzle` with the given id exists, a [PuzzleNotFoundException] error
   /// isthrown.
-  Future<void> deletePuzzle(int id);
+  Future<void> deletePuzzle(Puzzle puzzle);
 
   /// Deletes the `puzzleItem` with the given id.
   ///
   /// If no `puzzleItem` with the given id exists, a
   ///  [PuzzleItemNotFoundException] error is
   /// thrown.
-  Future<void> deletePuzzleItem(int id);
+  Future<void> deletePuzzleItem(PuzzleItem puzzleItem);
 
   /// Gets the `puzzle` with the given id.
   ///
@@ -55,14 +55,31 @@ abstract class PuzzlesApi {
   ///
   /// If no `puzzle` with the given id exists, a [PuzzleNotFoundException] error
   /// isthrown.
-  Future<void> getPuzzleById(int id);
+  Future<Puzzle?>? getPuzzleById(int id);
 
   /// Get the `puzzleItem` with the given id.
   ///
   /// If no `puzzleItem` with the given id exists, a
   /// [PuzzleItemNotFoundException] error is
   /// thrown.
-  Future<void> getPPuzzleItemById(int id);
+  Future<PuzzleItem?>? getPuzzleItemById(int id);
+
+  ///
+  //
+  /// Insert a puzzleItem
+  //
+
+  Future<void> insertPuzzleItem(PuzzleItem puzzleItem);
+
+  /// Get all puzzleItem given puzzle [id]
+  //
+
+  Future<List<PuzzleItem>?>? getAllPuzzlesItems(int id);
+
+  /// stream  all puzzleItems given puzzle[id]
+  //
+
+  Stream<List<PuzzleItem>?>? streamAllPuzzlesItems(int id);
 }
 
 /// Error thrown when a [Puzzle] with a given id is not found.
