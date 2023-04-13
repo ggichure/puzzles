@@ -13,6 +13,18 @@ class PuzzlesTable extends Table {
   TextColumn get completedAt => text().nullable()();
   @JsonKey('puzzle_type')
   TextColumn get puzzleType => text().nullable()();
+
+  @JsonKey('puzzle_id')
+  IntColumn get puzzleId => integer().nullable()();
+
+  @JsonKey('duration_in_seconds')
+  IntColumn get durationInSeconds => integer().nullable()();
+
+  @JsonKey('length_of_characters')
+  IntColumn get lengthOfCharacters => integer().nullable()();
+
+  @JsonKey('no_of_puzzle_items')
+  IntColumn get noOfPuzzleItems => integer().nullable()();
 }
 
 // PuzzlesItem Table
