@@ -12,7 +12,7 @@ abstract class PuzzlesCreatorsEvent extends Equatable {
 class PuzzlesConfigurationEvent extends PuzzlesCreatorsEvent {
   const PuzzlesConfigurationEvent(this.puzzle);
 
-  final Puzzle puzzle;
+  final Puzzle? puzzle;
 }
 
 /// Used to save a puzzle to local database

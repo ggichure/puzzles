@@ -20,7 +20,12 @@ class PuzzlesCreatorsBloc
       : _puzzlesRepository = puzzlesRepository,
         super(const PuzzlesCreatorsState._()) {
     on<PuzzlesConfigurationEvent>((event, emit) {
-      emit(state.copyWith(puzzle: event.puzzle));
+      emit(
+        state.copyWith(
+          puzzlesCreatorsStateStatus: PuzzlesCreatorsStateStatus.updated,
+          puzzle: event.puzzle,
+        ),
+      );
     });
     on<PuzzlesCreateEvent>((event, emit) async {
       try {
