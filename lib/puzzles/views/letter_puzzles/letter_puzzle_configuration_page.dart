@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:puzzles/l10n/l10n.dart';
 import 'package:puzzles/puzzles/blocs/puzzles_creator_bloc/puzzles_creators_bloc.dart';
+import 'package:puzzles/puzzles/puzzles.dart';
 import 'package:puzzles/puzzles/views/letter_puzzles/widgets/widgets.dart';
 import 'package:puzzles_api/puzzles_api.dart';
 import 'package:puzzles_repository/puzzles_repository.dart';
@@ -27,9 +28,9 @@ class LetterPuzzleConfigureView extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     context.read<PuzzlesCreatorsBloc>().add(
-          const PuzzlesConfigurationEvent(
+          PuzzlesConfigurationEvent(
             Puzzle(
-              puzzleType: 'LTRS',
+              puzzleType: enumToString(PUZZLETYPE.letters),
               noOfPuzzleItems: 100,
               lengthOfCharacters: 4,
               durationInSeconds: 3,

@@ -26,8 +26,13 @@ class HomePage extends StatelessWidget {
             children: [
               PuzzleTypeCard(
                 ontap: () {
-                  AutoRouter.of(context)
-                      .push(const LetterPuzzleConfigurePageRoute());
+                  AutoRouter.of(context).push(
+                    PuzzlesHistoryPageRoute(
+                      puzzleType: PUZZLETYPE.letters,
+                    ),
+                  );
+
+                  //.push(const LetterPuzzleConfigurePageRoute());
                 },
                 asset: Assets.svgs.letters,
                 title: l10n.lettersText,

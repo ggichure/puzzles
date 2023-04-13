@@ -7,7 +7,9 @@ part 'puzzles_get_event.dart';
 part 'puzzles_get_state.dart';
 
 class PuzzlesGetBloc extends Bloc<PuzzlesGetEvent, PuzzlesGetState> {
-  PuzzlesGetBloc(this._puzzlesRepository) : super(PuzzlesGetInitial()) {
+  PuzzlesGetBloc({required PuzzlesRepository puzzlesRepository})
+      : _puzzlesRepository = puzzlesRepository,
+        super(PuzzlesGetInitial()) {
     on<GetPuzzles>((event, emit) {
       emit.call(PuzzlesGetLoading());
       _puzzlesRepository.streamAllPuzzles(event.puzzleType)?.listen((puzzles) {

@@ -31,6 +31,17 @@ class _$AppRouter extends RootStackRouter {
         opaque: true,
       );
     },
+    PuzzlesHistoryPageRoute.name: (routeData) {
+      final args = routeData.argsAs<PuzzlesHistoryPageRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: PuzzlesHistoryPage(
+          key: args.key,
+          puzzleType: args.puzzleType,
+        ),
+        opaque: true,
+      );
+    },
   };
 
   @override
@@ -42,6 +53,10 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           LetterPuzzleConfigurePageRoute.name,
           path: '/letter-puzzle-configure-page',
+        ),
+        RouteConfig(
+          PuzzlesHistoryPageRoute.name,
+          path: '/puzzles-history-page',
         ),
       ];
 }
@@ -68,4 +83,39 @@ class LetterPuzzleConfigurePageRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LetterPuzzleConfigurePageRoute';
+}
+
+/// generated route for
+/// [PuzzlesHistoryPage]
+class PuzzlesHistoryPageRoute
+    extends PageRouteInfo<PuzzlesHistoryPageRouteArgs> {
+  PuzzlesHistoryPageRoute({
+    Key? key,
+    required PUZZLETYPE puzzleType,
+  }) : super(
+          PuzzlesHistoryPageRoute.name,
+          path: '/puzzles-history-page',
+          args: PuzzlesHistoryPageRouteArgs(
+            key: key,
+            puzzleType: puzzleType,
+          ),
+        );
+
+  static const String name = 'PuzzlesHistoryPageRoute';
+}
+
+class PuzzlesHistoryPageRouteArgs {
+  const PuzzlesHistoryPageRouteArgs({
+    this.key,
+    required this.puzzleType,
+  });
+
+  final Key? key;
+
+  final PUZZLETYPE puzzleType;
+
+  @override
+  String toString() {
+    return 'PuzzlesHistoryPageRouteArgs{key: $key, puzzleType: $puzzleType}';
+  }
 }
