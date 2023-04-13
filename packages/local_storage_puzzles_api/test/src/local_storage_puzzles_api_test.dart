@@ -58,7 +58,7 @@ class MockLocalStoragePuzzlesApi extends Mock
   }
 
   @override
-  Stream<List<Puzzle>?>? streamAllPuzzles() {
+  Stream<List<Puzzle>?>? streamAllPuzzles(String? puzzleType) {
     // Stream all puzzles from a mock local storage and return as a
     // Stream<List<Puzzle>>
     return Stream.value([]);

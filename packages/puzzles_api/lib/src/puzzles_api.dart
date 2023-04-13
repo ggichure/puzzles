@@ -9,7 +9,7 @@ abstract class PuzzlesApi {
   const PuzzlesApi();
 
   /// Provides a [Stream] of all puzzles.
-  Stream<List<Puzzle>?>? streamAllPuzzles();
+  Stream<List<Puzzle>?>? streamAllPuzzles(String? puzzleType);
 
   /// Provides a [Stream] of all puzzleItems.
   Stream<List<PuzzleItem>>? streamPuzzleItems(int puzzleId);

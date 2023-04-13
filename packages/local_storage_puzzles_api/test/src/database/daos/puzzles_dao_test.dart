@@ -20,7 +20,8 @@ class MockPuzzlesDao extends Mock implements PuzzlesDao {
   Future<List<Puzzle>>? getAllPuzzles() => Future.value(puzzles);
 
   @override
-  Stream<List<Puzzle>> streamAllPuzzles() => Stream.value(puzzles);
+  Stream<List<Puzzle>> streamAllPuzzles(String? puzzleType) =>
+      Stream.value(puzzles);
 
   @override
   Future<Puzzle?>? getPuzzleById(int id) => Future.value(puzzle);
@@ -92,7 +93,7 @@ void main() {
     test('Test streamAllPuzzles', () async {
       await puzzlesDao.insertPuzzle(puzzle);
 
-      final result = puzzlesDao.streamAllPuzzles();
+      final result = puzzlesDao.streamAllPuzzles('puzzleType');
 
       // Verify that the streamAllPuzzles method is called with the correct
       // argument

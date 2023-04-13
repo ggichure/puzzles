@@ -31,10 +31,23 @@ class PuzzlesDao extends DatabaseAccessor<MyDatabase> with _$PuzzlesDaoMixin {
   }
 
   /// Provide a [Stream] of all puzzles
-  Stream<List<Puzzle>> streamAllPuzzles() {
-    return select(puzzlesTable).watch().map((puzzles) {
-      return puzzles.map((puzzle) => Puzzle.fromJson(puzzle.toJson())).toList();
-    });
+  Stream<List<Puzzle>> streamAllPuzzles(String? puzzleType) {
+    if (puzzleType?.isNotEmpty ?? false) {
+      return select(puzzlesTable).watch().map((puzzles) {
+        return puzzles
+            .map((puzzle) => Puzzle.fromJson(puzzle.toJson()))
+            .toList();
+      });
+    } else {
+      return (select(puzzlesTable)
+            ..where((tbl) => tbl.puzzleType.equals(puzzleType!)))
+          .watch()
+          .map((puzzles) {
+        return puzzles
+            .map((puzzle) => Puzzle.fromJson(puzzle.toJson()))
+            .toList();
+      });
+    }
   }
 
   /// Get a Puzzle object by id

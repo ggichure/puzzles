@@ -66,7 +66,7 @@ class MockPuzzlesRepository extends Mock implements PuzzlesRepository {
   }
 
   @override
-  Stream<List<Puzzle>?>? streamAllPuzzles() {
+  Stream<List<Puzzle>?>? streamAllPuzzles(String? puzzleType) {
     return Stream.value([puzzle]);
   }
 
@@ -164,7 +164,7 @@ void main() {
     test('Test streamAllPuzzles', () async {
       await puzzlesRepository.insertPuzzle(puzzle);
 
-      final result = puzzlesRepository.streamAllPuzzles();
+      final result = puzzlesRepository.streamAllPuzzles('puzzles');
 
       // Verify that the streamAllPuzzles method is called with the correct
       // argument

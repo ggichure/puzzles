@@ -28,8 +28,8 @@ class PuzzlesRepository {
       _localStoragePuzzlesApi.getAllPuzzles();
 
   /// stream  all puzzles
-  Stream<List<Puzzle>?>? streamAllPuzzles() =>
-      _localStoragePuzzlesApi.streamAllPuzzles();
+  Stream<List<Puzzle>?>? streamAllPuzzles(String? puzzleType) =>
+      _localStoragePuzzlesApi.streamAllPuzzles(puzzleType);
 
   /// Get a puzzle by id
   Future<Puzzle?>? getPuzzleById(int id) =>

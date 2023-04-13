@@ -35,7 +35,8 @@ class LocalStoragePuzzlesApi extends PuzzlesApi {
   /// stream  all puzzles
   //
   @override
-  Stream<List<Puzzle>?>? streamAllPuzzles() => _puzzlesDao.streamAllPuzzles();
+  Stream<List<Puzzle>?>? streamAllPuzzles(String? puzzleType) =>
+      _puzzlesDao.streamAllPuzzles(puzzleType);
 
   /// Get a puzzle by id
   //
