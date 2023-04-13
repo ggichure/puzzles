@@ -32,30 +32,122 @@ class LetterPuzzleConfigureView extends StatelessWidget {
               puzzleType: 'LTRS',
               noOfPuzzleItems: 100,
               lengthOfCharacters: 4,
-              durationInSeconds: 180,
+              durationInSeconds: 3,
             ),
           ),
         );
-    final puzzlesBloc = context.watch<PuzzlesCreatorsBloc>().state;
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: Text('${l10n.lettersText} ${l10n.puzzlesAppBarTitle}'),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              // length of words
-              const LengthOfCharactersWidget(),
-              // time
 
-              /// no of questions
-            ]),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 120),
-          ),
-        ],
+    return Scaffold(
+      body: BlocConsumer<PuzzlesCreatorsBloc, PuzzlesCreatorsState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          return CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                title: Text('${l10n.lettersText} ${l10n.puzzlesAppBarTitle}'),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  // length of words
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(
+                      '''Select length of words : ${state.puzzle?.lengthOfCharacters}''',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  LengthOfCharactersWidget(
+                    onTap: (int i) {
+                      BlocProvider.of<PuzzlesCreatorsBloc>(context).add(
+                        PuzzlesConfigurationEvent(
+                          state.puzzle?.copyWith(
+                            lengthOfCharacters: i,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  // time
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(
+                      '''Select desired time to complete puzzles in minutes ${state.puzzle?.durationInSeconds}''',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  LengthOfCharactersWidget(
+                    minValue: 1,
+                    maxValue: 100,
+                    onTap: (int i) {
+                      BlocProvider.of<PuzzlesCreatorsBloc>(context).add(
+                        PuzzlesConfigurationEvent(
+                          state.puzzle?.copyWith(
+                            durationInSeconds: i,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
+                  /// no of questions
+                  //
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Text(
+                      '''Select desired no of puzzles ${state.puzzle?.noOfPuzzleItems}''',
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  LengthOfCharactersWidget(
+                    minValue: 1,
+                    maxValue: 200,
+                    onTap: (int i) {
+                      BlocProvider.of<PuzzlesCreatorsBloc>(context).add(
+                        PuzzlesConfigurationEvent(
+                          state.puzzle?.copyWith(
+                            noOfPuzzleItems: i,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+
+                  const SizedBox(
+                    height: 18,
+                  ),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      BlocProvider.of<PuzzlesCreatorsBloc>(context).add(
+                        PuzzlesCreateEvent(
+                          state.puzzle,
+                        ),
+                      );
+                    },
+                    child: const Text('Start'),
+                  )
+                ]),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 120),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -21,7 +21,12 @@ class PuzzlesCreatorsBloc
         super(const PuzzlesCreatorsState._()) {
     on<PuzzlesConfigurationEvent>((event, emit) {
       emit(
-        state.copyWith(
+        const PuzzlesCreatorsState._(
+          puzzlesCreatorsStateStatus: PuzzlesCreatorsStateStatus.loading,
+        ),
+      );
+      emit(
+        PuzzlesCreatorsState._(
           puzzlesCreatorsStateStatus: PuzzlesCreatorsStateStatus.updated,
           puzzle: event.puzzle,
         ),
@@ -34,7 +39,7 @@ class PuzzlesCreatorsBloc
             puzzlesCreatorsStateStatus: PuzzlesCreatorsStateStatus.loading,
           ),
         );
-        await _puzzlesRepository.insertPuzzle(event.puzzle);
+        await _puzzlesRepository.insertPuzzle(event.puzzle!);
         emit(
           state.copyWith(
             puzzlesCreatorsStateStatus: PuzzlesCreatorsStateStatus.success,

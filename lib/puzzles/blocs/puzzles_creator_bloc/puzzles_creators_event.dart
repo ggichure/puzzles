@@ -19,5 +19,5 @@ class PuzzlesConfigurationEvent extends PuzzlesCreatorsEvent {
 class PuzzlesCreateEvent extends PuzzlesCreatorsEvent {
   const PuzzlesCreateEvent(this.puzzle);
 
-  final Puzzle puzzle;
+  final Puzzle? puzzle;
 }

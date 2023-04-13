@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:puzzles/puzzles/blocs/puzzles_creator_bloc/puzzles_creators_bloc.dart';
 
 typedef IntCallback = void Function(int value);
 
 class LengthOfCharactersWidget extends StatefulWidget {
   const LengthOfCharactersWidget({
     super.key,
+    this.onTap,
+    this.maxValue,
+    this.minValue,
   });
-
+  final IntCallback? onTap;
+  final double? maxValue;
+  final double? minValue;
   @override
   State<LengthOfCharactersWidget> createState() =>
       _LengthOfCharactersWidgetState();
@@ -17,9 +20,12 @@ class LengthOfCharactersWidget extends StatefulWidget {
 class _LengthOfCharactersWidgetState extends State<LengthOfCharactersWidget> {
   double _sliderValue = 4;
   @override
-  Widget build(BuildContext context) {
-    final puzzlesBloc = context.watch<PuzzlesCreatorsBloc>().state;
+  void initState() {
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
         trackHeight: 10,
@@ -46,20 +52,15 @@ class _LengthOfCharactersWidgetState extends State<LengthOfCharactersWidget> {
       child: Slider(
         value: _sliderValue,
         onChanged: (newValue) {
-          context.read<PuzzlesCreatorsBloc>().add(
-                PuzzlesConfigurationEvent(
-                  puzzlesBloc.puzzle?.copyWith(
-                    lengthOfCharacters: newValue.round(),
-                  ),
-                ),
-              );
+          widget.onTap!(newValue.round());
           setState(() {
             _sliderValue = newValue;
           });
         },
-        min: 4,
-        max: 20,
-        divisions: 160,
+        min: widget.minValue ?? 4,
+        max: widget.maxValue ?? 20,
+        divisions:
+            (((widget.maxValue ?? 20) - (widget.minValue ?? 4)) * 10).toInt(),
         label: _sliderValue.round().toString(),
       ),
     );
