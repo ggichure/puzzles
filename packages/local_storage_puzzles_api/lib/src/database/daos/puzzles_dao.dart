@@ -13,8 +13,12 @@ class PuzzlesDao extends DatabaseAccessor<MyDatabase> with _$PuzzlesDaoMixin {
   PuzzlesDao(super.attachedDatabase);
 
   /// Insert a PuzzlesModel object
-  Future<void> insertPuzzle(Puzzle puzzle) => into(puzzlesTable)
-      .insertOnConflictUpdate(PuzzlesTableData.fromJson(puzzle.toJson()));
+  Future<void> insertPuzzle(Puzzle puzzle) =>
+      into(puzzlesTable).insertOnConflictUpdate(
+        PuzzlesTableData.fromJson(
+          puzzle.copyWith(createdAt: DateTime.now().toIso8601String()).toJson(),
+        ),
+      );
 
   /// Update a Puzzle object
   Future<void> updatePuzzle(Puzzle puzzle) =>
@@ -32,15 +36,25 @@ class PuzzlesDao extends DatabaseAccessor<MyDatabase> with _$PuzzlesDaoMixin {
 
   /// Provide a [Stream] of all puzzles
   Stream<List<Puzzle>> streamAllPuzzles(String? puzzleType) {
-    if (puzzleType?.isNotEmpty ?? false) {
-      return select(puzzlesTable).watch().map((puzzles) {
+    if (puzzleType?.isEmpty ?? false) {
+      return (select(puzzlesTable)
+            ..orderBy([
+              (u) =>
+                  OrderingTerm(expression: u.createdAt, mode: OrderingMode.desc)
+            ]))
+          .watch()
+          .map((puzzles) {
         return puzzles
             .map((puzzle) => Puzzle.fromJson(puzzle.toJson()))
             .toList();
       });
     } else {
       return (select(puzzlesTable)
-            ..where((tbl) => tbl.puzzleType.equals(puzzleType!)))
+            ..where((tbl) => tbl.puzzleType.equals(puzzleType!))
+            ..orderBy([
+              (u) =>
+                  OrderingTerm(expression: u.createdAt, mode: OrderingMode.desc)
+            ]))
           .watch()
           .map((puzzles) {
         return puzzles
