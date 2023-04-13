@@ -1,5 +1,4 @@
-import 'package:local_storage_puzzles_api/src/database/daos/puzzle_items_dao.dart';
-import 'package:local_storage_puzzles_api/src/database/daos/puzzles_dao.dart';
+import 'package:local_storage_puzzles_api/local_storage_puzzles_api.dart';
 import 'package:puzzles_api/puzzles_api.dart';
 
 /// {@template local_storage_puzzles_api}

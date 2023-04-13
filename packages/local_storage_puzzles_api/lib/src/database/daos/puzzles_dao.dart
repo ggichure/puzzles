@@ -10,7 +10,7 @@ part 'puzzles_dao.g.dart';
 /// {@macro puzzles_api}
 class PuzzlesDao extends DatabaseAccessor<MyDatabase> with _$PuzzlesDaoMixin {
   /// {@macro puzzles_api}
-  PuzzlesDao(super.db);
+  PuzzlesDao(super.attachedDatabase);
 
   /// Insert a PuzzlesModel object
   Future<void> insertPuzzle(Puzzle puzzle) => into(puzzlesTable)

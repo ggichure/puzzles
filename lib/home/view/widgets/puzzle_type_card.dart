@@ -31,7 +31,7 @@ class PuzzleTypeCard extends StatelessWidget {
   final PUZZLETYPE puzzletype;
 
   /// used to handle navigation
-  final Function()? ontap;
+  final VoidCallback? ontap;
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;

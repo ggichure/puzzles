@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:puzzles/l10n/l10n.dart';
-import 'package:puzzles_repository/puzzles_repository.dart';
-
 import 'package:puzzles/puzzles/blocs/puzzles_creator_bloc/puzzles_creators_bloc.dart';
+import 'package:puzzles_repository/puzzles_repository.dart';
 
 class LetterPuzzleConfigurePage extends StatelessWidget {
   const LetterPuzzleConfigurePage({super.key});
