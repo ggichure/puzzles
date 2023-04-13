@@ -7,7 +7,8 @@ part 'puzzle.g.dart';
 /// {@template puzzle}
 /// A single `puzzle` .
 ///
-/// Contains a [puzzleType], [createdAt] and [completedAt]
+/// Contains a [puzzleType], [createdAt],[lengthOfCharacters],
+/// [durationInSeconds], [durationInSeconds]  and [completedAt]
 ///
 /// If an [id] is provided, it cannot be empty. If no [id] is provided, one
 /// will be generated.
@@ -24,6 +25,9 @@ class Puzzle extends Equatable {
     this.id,
     this.puzzleType,
     this.createdAt,
+    this.lengthOfCharacters,
+    this.durationInSeconds,
+    this.noOfPuzzleItems,
     this.completedAt,
   });
 
@@ -42,6 +46,19 @@ class Puzzle extends Equatable {
   @JsonKey(name: 'completed_at')
   final String? completedAt;
 
+  /// Holds the length of puzzle characters eg 5,6,7
+//
+  @JsonKey(name: 'length_of_characters')
+  final int? lengthOfCharacters;
+
+  /// Holds user selected duration
+  @JsonKey(name: 'duration_in_seconds')
+  final int? durationInSeconds;
+
+  /// Holds user defined no_of_puzzle_items
+  @JsonKey(name: 'no_of_puzzle_items')
+  final int? noOfPuzzleItems;
+
   /// Deserializes the given [JsonMap] into a [Puzzle].
   static Puzzle fromJson(JsonMap json) => _$PuzzleFromJson(json);
 
@@ -54,12 +71,18 @@ class Puzzle extends Equatable {
     String? puzzleType,
     String? createdAt,
     String? completedAt,
+    int? lengthOfCharacters,
+    int? durationInSeconds,
+    int? noOfPuzzleItems,
   }) {
     return Puzzle(
       id: id ?? this.id,
       puzzleType: puzzleType ?? this.puzzleType,
       createdAt: createdAt ?? this.createdAt,
       completedAt: completedAt ?? this.completedAt,
+      lengthOfCharacters: lengthOfCharacters ?? this.lengthOfCharacters,
+      durationInSeconds: durationInSeconds ?? this.durationInSeconds,
+      noOfPuzzleItems: noOfPuzzleItems ?? this.noOfPuzzleItems,
     );
   }
 

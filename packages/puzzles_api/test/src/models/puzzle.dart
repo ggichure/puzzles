@@ -8,12 +8,18 @@ void main() {
       String? puzzleType = 'xoxoxx',
       String? createdAt = '2023/04/07',
       String? completedAt = '2023/04/07',
+      int? lengthOfCharacters = 1,
+      int? durationInSeconds = 1,
+      int? noOfPuzzleItems = 1,
     }) {
       return Puzzle(
         id: id,
         puzzleType: puzzleType,
         createdAt: createdAt,
         completedAt: completedAt,
+        lengthOfCharacters: lengthOfCharacters,
+        durationInSeconds: durationInSeconds,
+        noOfPuzzleItems: noOfPuzzleItems,
       );
     }
 
@@ -48,6 +54,9 @@ void main() {
           'xoxoxx', // puzzle_type
           '2023/04/07', // created_at
           '2023/04/07', // completed_at
+          1, //lengthOfCharacters
+          1, //durationInSeconds
+          1 //noOfPuzzles
         ]),
       );
     });
@@ -72,6 +81,9 @@ void main() {
             puzzleType: 'puzzleType',
             createdAt: 'createdAt',
             completedAt: 'completedAt',
+            lengthOfCharacters: 2,
+            durationInSeconds: 2,
+            noOfPuzzleItems: 2,
           ),
           equals(
             createSubject(
@@ -79,6 +91,9 @@ void main() {
               puzzleType: 'puzzleType',
               createdAt: 'createdAt',
               completedAt: 'completedAt',
+              lengthOfCharacters: 2,
+              durationInSeconds: 2,
+              noOfPuzzleItems: 2,
             ),
           ),
         );
@@ -91,6 +106,9 @@ void main() {
               'puzzle_type': 'xoxoxx',
               'created_at': '2023/04/07',
               'completed_at': '2023/04/07',
+              'length_of_characters': 1, //lengthOfCharacters
+              'duration_in_seconds': 1, //durationInSeconds
+              'no_of_puzzle_items': 1 //noOfPuzzles
             }),
             equals(createSubject()),
           );
@@ -106,6 +124,9 @@ void main() {
               'puzzle_type': 'xoxoxx',
               'created_at': '2023/04/07',
               'completed_at': '2023/04/07',
+              'length_of_characters': 1, //lengthOfCharacters
+              'duration_in_seconds': 1, //durationInSeconds
+              'no_of_puzzle_items': 1 //noOfPuzzles
             }),
           );
         });
