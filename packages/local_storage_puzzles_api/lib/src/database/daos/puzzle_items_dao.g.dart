@@ -6,4 +6,5 @@ part of 'puzzle_items_dao.dart';
 mixin _$PuzzlesItemDaoMixin on DatabaseAccessor<MyDatabase> {
   $PuzzlesItemTableTable get puzzlesItemTable =>
       attachedDatabase.puzzlesItemTable;
+  $PuzzlesTableTable get puzzlesTable => attachedDatabase.puzzlesTable;
 }

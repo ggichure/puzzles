@@ -5,7 +5,7 @@ import 'package:puzzles_api/puzzles_api.dart';
 
 part 'puzzle_items_dao.g.dart';
 
-@DriftAccessor(tables: [PuzzlesItemTable])
+@DriftAccessor(tables: [PuzzlesItemTable, PuzzlesTable])
 
 /// {@macro puzzles_api}
 class PuzzlesItemDao extends DatabaseAccessor<MyDatabase>
@@ -14,10 +14,27 @@ class PuzzlesItemDao extends DatabaseAccessor<MyDatabase>
   PuzzlesItemDao(super.db);
 
   /// Insert a PuzzleItem object
-  Future<void> insertPuzzleItem(PuzzleItem puzzleItem) =>
-      into(puzzlesItemTable).insertOnConflictUpdate(
+  Future<void> insertPuzzleItem(PuzzleItem puzzleItem) async {
+    return transaction(() async {
+      // insert puzzle_item
+      await into(puzzlesItemTable).insertOnConflictUpdate(
         PuzzlesItemTableData.fromJson(puzzleItem.toJson()),
       );
+      //count no of items
+      final noOfPuzzleItems = puzzlesItemTable.id.count();
+      final query = selectOnly(puzzlesTable)..addColumns([noOfPuzzleItems]);
+      final result =
+          await query.map((row) => row.read(noOfPuzzleItems)).getSingle();
+// update puzzle with no of completed puzzle by +1 to completedPuzzles
+      await (update(puzzlesTable)
+            ..where((tbl) => tbl.id.equals(puzzleItem.puzzleId!)))
+          .write(
+        PuzzlesTableCompanion(
+          completedPuzzles: Value((result ?? 0) + 1),
+        ),
+      );
+    });
+  }
 
   /// Update a PuzzleItem object
   Future<void> updatePuzzleItem(PuzzleItem puzzleItem) =>
