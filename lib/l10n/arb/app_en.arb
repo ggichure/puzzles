@@ -23,5 +23,13 @@
     "mixedPuzzlesText": "Mixed",
     "@mixedPuzzlesText": {
         "description": "Text shown when using Mixed puzzles"
+    },
+    "tryAgainText": "Try Again",
+    "@tryAgainText": {
+        "description": "Text shown for user to Try Again"
+    },
+    "errorText": "Error",
+    "@errorText": {
+        "description": "Text shown for when there is an error"
     }
 }

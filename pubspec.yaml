@@ -25,6 +25,8 @@ dependencies:
     path: ./packages/puzzles_api
   puzzles_repository:
     path: ./packages/puzzles_repository
+  words_generator:
+    path: packages/words_generator
   words_generator_repository:
     path: packages/words_generator_repository
 
