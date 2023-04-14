@@ -17,7 +17,8 @@ class LocalStoragePuzzlesApi extends PuzzlesApi {
 
   /// Insert a puzzle
   @override
-  Future<void> insertPuzzle(Puzzle puzzle) => _puzzlesDao.insertPuzzle(puzzle);
+  Future<Puzzle>? insertPuzzle(Puzzle puzzle) =>
+      _puzzlesDao.insertPuzzle(puzzle);
 
   /// Update a puzzle
   //

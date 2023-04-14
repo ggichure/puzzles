@@ -12,7 +12,7 @@ class PuzzlesRepository {
   final LocalStoragePuzzlesApi _localStoragePuzzlesApi;
 
   /// Insert a puzzle
-  Future<void> insertPuzzle(Puzzle puzzle) =>
+  Future<Puzzle>? insertPuzzle(Puzzle puzzle) =>
       _localStoragePuzzlesApi.insertPuzzle(puzzle);
 
   /// Update a puzzle

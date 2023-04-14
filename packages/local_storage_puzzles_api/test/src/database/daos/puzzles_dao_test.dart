@@ -8,7 +8,7 @@ import 'package:puzzles_api/puzzles_api.dart';
 
 class MockPuzzlesDao extends Mock implements PuzzlesDao {
   @override
-  Future<void> insertPuzzle(Puzzle puzzle) => Future.value();
+  Future<Puzzle> insertPuzzle(Puzzle puzzle) => Future.value(puzzle);
 
   @override
   Future<void> updatePuzzle(Puzzle puzzle) => Future.value();

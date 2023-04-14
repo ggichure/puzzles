@@ -13,12 +13,15 @@ class PuzzlesDao extends DatabaseAccessor<MyDatabase> with _$PuzzlesDaoMixin {
   PuzzlesDao(super.attachedDatabase);
 
   /// Insert a PuzzlesModel object
-  Future<void> insertPuzzle(Puzzle puzzle) =>
-      into(puzzlesTable).insertOnConflictUpdate(
-        PuzzlesTableData.fromJson(
-          puzzle.copyWith(createdAt: DateTime.now().toIso8601String()).toJson(),
-        ),
-      );
+  /// returns a puzzle item with inserted id
+  Future<Puzzle>? insertPuzzle(Puzzle puzzle) async {
+    final insertedItemId = await into(puzzlesTable).insertOnConflictUpdate(
+      PuzzlesTableData.fromJson(
+        puzzle.copyWith(createdAt: DateTime.now().toIso8601String()).toJson(),
+      ),
+    );
+    return puzzle.copyWith(id: insertedItemId);
+  }
 
   /// Update a Puzzle object
   Future<void> updatePuzzle(Puzzle puzzle) =>

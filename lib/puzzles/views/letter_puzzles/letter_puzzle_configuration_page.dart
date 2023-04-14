@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:puzzles/l10n/l10n.dart';
 import 'package:puzzles/puzzles/blocs/puzzles_creator_bloc/puzzles_creators_bloc.dart';
 import 'package:puzzles/puzzles/puzzles.dart';
+import 'package:puzzles/puzzles/views/letter_puzzles/letter_puzzles_play_page.dart';
 import 'package:puzzles/puzzles/views/letter_puzzles/widgets/widgets.dart';
+import 'package:puzzles/router/app_router.dart';
 import 'package:puzzles_api/puzzles_api.dart';
 import 'package:puzzles_repository/puzzles_repository.dart';
 
@@ -41,7 +44,18 @@ class LetterPuzzleConfigureView extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<PuzzlesCreatorsBloc, PuzzlesCreatorsState>(
         listener: (context, state) {
-          // TODO: implement listener
+          switch (state.puzzlesCreatorsStateStatus) {
+            case PuzzlesCreatorsStateStatus.success:
+              AutoRouter.of(context).push(
+                LettersPuzzlesPlayPageRoute(
+                  completed: false,
+                  puzzle: state.puzzle,
+                ),
+              );
+
+              break;
+            default:
+          }
         },
         builder: (context, state) {
           return CustomScrollView(

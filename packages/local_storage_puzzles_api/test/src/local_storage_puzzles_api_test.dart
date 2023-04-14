@@ -46,9 +46,9 @@ class MockLocalStoragePuzzlesApi extends Mock
   }
 
   @override
-  Future<void> insertPuzzle(Puzzle puzzle) {
+  Future<Puzzle>? insertPuzzle(Puzzle puzzle) {
     // Insert the puzzle into a mock local storage
-    return Future.value();
+    return Future.value(puzzle);
   }
 
   @override

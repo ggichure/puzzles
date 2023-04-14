@@ -35,7 +35,7 @@ class MyDatabase extends _$MyDatabase {
       : super(queryExecutor ?? openConnection());
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(

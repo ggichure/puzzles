@@ -56,8 +56,8 @@ class MockPuzzlesRepository extends Mock implements PuzzlesRepository {
   }
 
   @override
-  Future<void> insertPuzzle(Puzzle puzzle) {
-    return Future.value();
+  Future<Puzzle>? insertPuzzle(Puzzle puzzle) {
+    return Future.value(puzzle);
   }
 
   @override

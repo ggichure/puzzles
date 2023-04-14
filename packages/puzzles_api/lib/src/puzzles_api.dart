@@ -17,7 +17,7 @@ abstract class PuzzlesApi {
   /// Saves a [puzzle].
   ///
   /// If a [puzzle] with the same id already exists, it will be replaced.
-  Future<void> insertPuzzle(Puzzle puzzle);
+  Future<Puzzle>? insertPuzzle(Puzzle puzzle);
 
   /// Saves a [puzzleItem].
   ///
