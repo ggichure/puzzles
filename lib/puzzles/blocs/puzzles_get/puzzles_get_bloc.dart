@@ -12,9 +12,20 @@ class PuzzlesGetBloc extends Bloc<PuzzlesGetEvent, PuzzlesGetState> {
         super(PuzzlesGetInitial()) {
     on<GetPuzzles>((event, emit) {
       emit.call(PuzzlesGetLoading());
-      _puzzlesRepository.streamAllPuzzles(event.puzzleType)?.listen((puzzles) {
-        add(GotPuzzles(puzzles));
-      });
+
+      _puzzlesRepository.streamAllPuzzles(event.puzzleType)?.listen(
+        (puzzles) {
+          add(GotPuzzles(puzzles));
+        },
+        // ignore: inference_failure_on_untyped_parameter
+        onError: (error) {
+          // Handle error, if needed
+          emit.call(PuzzlesGetError(error.toString()));
+        },
+        onDone: () {
+          // Handle stream completion, if needed
+        },
+      );
     });
 
     on<GotPuzzles>((event, emit) {

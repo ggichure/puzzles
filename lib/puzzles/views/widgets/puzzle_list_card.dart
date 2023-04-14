@@ -8,12 +8,24 @@ class PuzzleListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            offset: const Offset(0, 4),
+            blurRadius: 8,
+          ),
+        ],
+        border: Border.all(color: Theme.of(context).primaryColor),
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Column(
         children: [
           Text('Type: ${puzzle?.puzzleType} '),
           Text('Puzzles: ${puzzle?.noOfPuzzleItems} '),
+          Text('Puzzles: ${puzzle?.toJson()} '),
         ],
       ),
     );

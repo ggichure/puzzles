@@ -31,8 +31,6 @@ class HomePage extends StatelessWidget {
                       puzzleType: PUZZLETYPE.letters,
                     ),
                   );
-
-                  //.push(const LetterPuzzleConfigurePageRoute());
                 },
                 asset: Assets.svgs.letters,
                 title: l10n.lettersText,

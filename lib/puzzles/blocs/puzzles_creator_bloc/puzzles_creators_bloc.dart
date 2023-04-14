@@ -39,7 +39,11 @@ class PuzzlesCreatorsBloc
             puzzlesCreatorsStateStatus: PuzzlesCreatorsStateStatus.loading,
           ),
         );
-        await _puzzlesRepository.insertPuzzle(event.puzzle!);
+        await _puzzlesRepository.insertPuzzle(
+          event.puzzle!.copyWith(
+            durationInSeconds: (event.puzzle?.durationInSeconds ?? 1) * 60,
+          ),
+        );
         emit(
           state.copyWith(
             puzzlesCreatorsStateStatus: PuzzlesCreatorsStateStatus.success,
