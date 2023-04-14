@@ -500,6 +500,18 @@ class $PuzzlesTableTable extends PuzzlesTable
   late final GeneratedColumn<int> noOfPuzzleItems = GeneratedColumn<int>(
       'no_of_puzzle_items', aliasedName, true,
       type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _completedPuzzlesMeta =
+      const VerificationMeta('completedPuzzles');
+  @override
+  late final GeneratedColumn<int> completedPuzzles = GeneratedColumn<int>(
+      'completed_puzzles', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _difficultyLevelMeta =
+      const VerificationMeta('difficultyLevel');
+  @override
+  late final GeneratedColumn<double> difficultyLevel = GeneratedColumn<double>(
+      'difficulty_level', aliasedName, true,
+      type: DriftSqlType.double, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
         id,
@@ -509,7 +521,9 @@ class $PuzzlesTableTable extends PuzzlesTable
         puzzleId,
         durationInSeconds,
         lengthOfCharacters,
-        noOfPuzzleItems
+        noOfPuzzleItems,
+        completedPuzzles,
+        difficultyLevel
       ];
   @override
   String get aliasedName => _alias ?? 'puzzles_table';
@@ -561,6 +575,18 @@ class $PuzzlesTableTable extends PuzzlesTable
           noOfPuzzleItems.isAcceptableOrUnknown(
               data['no_of_puzzle_items']!, _noOfPuzzleItemsMeta));
     }
+    if (data.containsKey('completed_puzzles')) {
+      context.handle(
+          _completedPuzzlesMeta,
+          completedPuzzles.isAcceptableOrUnknown(
+              data['completed_puzzles']!, _completedPuzzlesMeta));
+    }
+    if (data.containsKey('difficulty_level')) {
+      context.handle(
+          _difficultyLevelMeta,
+          difficultyLevel.isAcceptableOrUnknown(
+              data['difficulty_level']!, _difficultyLevelMeta));
+    }
     return context;
   }
 
@@ -586,6 +612,10 @@ class $PuzzlesTableTable extends PuzzlesTable
           DriftSqlType.int, data['${effectivePrefix}length_of_characters']),
       noOfPuzzleItems: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}no_of_puzzle_items']),
+      completedPuzzles: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}completed_puzzles']),
+      difficultyLevel: attachedDatabase.typeMapping.read(
+          DriftSqlType.double, data['${effectivePrefix}difficulty_level']),
     );
   }
 
@@ -605,6 +635,8 @@ class PuzzlesTableData extends DataClass
   final int? durationInSeconds;
   final int? lengthOfCharacters;
   final int? noOfPuzzleItems;
+  final int? completedPuzzles;
+  final double? difficultyLevel;
   const PuzzlesTableData(
       {this.id,
       this.createdAt,
@@ -613,7 +645,9 @@ class PuzzlesTableData extends DataClass
       this.puzzleId,
       this.durationInSeconds,
       this.lengthOfCharacters,
-      this.noOfPuzzleItems});
+      this.noOfPuzzleItems,
+      this.completedPuzzles,
+      this.difficultyLevel});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -640,6 +674,12 @@ class PuzzlesTableData extends DataClass
     }
     if (!nullToAbsent || noOfPuzzleItems != null) {
       map['no_of_puzzle_items'] = Variable<int>(noOfPuzzleItems);
+    }
+    if (!nullToAbsent || completedPuzzles != null) {
+      map['completed_puzzles'] = Variable<int>(completedPuzzles);
+    }
+    if (!nullToAbsent || difficultyLevel != null) {
+      map['difficulty_level'] = Variable<double>(difficultyLevel);
     }
     return map;
   }
@@ -668,6 +708,12 @@ class PuzzlesTableData extends DataClass
       noOfPuzzleItems: noOfPuzzleItems == null && nullToAbsent
           ? const Value.absent()
           : Value(noOfPuzzleItems),
+      completedPuzzles: completedPuzzles == null && nullToAbsent
+          ? const Value.absent()
+          : Value(completedPuzzles),
+      difficultyLevel: difficultyLevel == null && nullToAbsent
+          ? const Value.absent()
+          : Value(difficultyLevel),
     );
   }
 
@@ -684,6 +730,8 @@ class PuzzlesTableData extends DataClass
       lengthOfCharacters:
           serializer.fromJson<int?>(json['length_of_characters']),
       noOfPuzzleItems: serializer.fromJson<int?>(json['no_of_puzzle_items']),
+      completedPuzzles: serializer.fromJson<int?>(json['completed_puzzles']),
+      difficultyLevel: serializer.fromJson<double?>(json['difficulty_level']),
     );
   }
   @override
@@ -698,6 +746,8 @@ class PuzzlesTableData extends DataClass
       'duration_in_seconds': serializer.toJson<int?>(durationInSeconds),
       'length_of_characters': serializer.toJson<int?>(lengthOfCharacters),
       'no_of_puzzle_items': serializer.toJson<int?>(noOfPuzzleItems),
+      'completed_puzzles': serializer.toJson<int?>(completedPuzzles),
+      'difficulty_level': serializer.toJson<double?>(difficultyLevel),
     };
   }
 
@@ -709,7 +759,9 @@ class PuzzlesTableData extends DataClass
           Value<int?> puzzleId = const Value.absent(),
           Value<int?> durationInSeconds = const Value.absent(),
           Value<int?> lengthOfCharacters = const Value.absent(),
-          Value<int?> noOfPuzzleItems = const Value.absent()}) =>
+          Value<int?> noOfPuzzleItems = const Value.absent(),
+          Value<int?> completedPuzzles = const Value.absent(),
+          Value<double?> difficultyLevel = const Value.absent()}) =>
       PuzzlesTableData(
         id: id.present ? id.value : this.id,
         createdAt: createdAt.present ? createdAt.value : this.createdAt,
@@ -725,6 +777,12 @@ class PuzzlesTableData extends DataClass
         noOfPuzzleItems: noOfPuzzleItems.present
             ? noOfPuzzleItems.value
             : this.noOfPuzzleItems,
+        completedPuzzles: completedPuzzles.present
+            ? completedPuzzles.value
+            : this.completedPuzzles,
+        difficultyLevel: difficultyLevel.present
+            ? difficultyLevel.value
+            : this.difficultyLevel,
       );
   @override
   String toString() {
@@ -736,14 +794,25 @@ class PuzzlesTableData extends DataClass
           ..write('puzzleId: $puzzleId, ')
           ..write('durationInSeconds: $durationInSeconds, ')
           ..write('lengthOfCharacters: $lengthOfCharacters, ')
-          ..write('noOfPuzzleItems: $noOfPuzzleItems')
+          ..write('noOfPuzzleItems: $noOfPuzzleItems, ')
+          ..write('completedPuzzles: $completedPuzzles, ')
+          ..write('difficultyLevel: $difficultyLevel')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, createdAt, completedAt, puzzleType,
-      puzzleId, durationInSeconds, lengthOfCharacters, noOfPuzzleItems);
+  int get hashCode => Object.hash(
+      id,
+      createdAt,
+      completedAt,
+      puzzleType,
+      puzzleId,
+      durationInSeconds,
+      lengthOfCharacters,
+      noOfPuzzleItems,
+      completedPuzzles,
+      difficultyLevel);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -755,7 +824,9 @@ class PuzzlesTableData extends DataClass
           other.puzzleId == this.puzzleId &&
           other.durationInSeconds == this.durationInSeconds &&
           other.lengthOfCharacters == this.lengthOfCharacters &&
-          other.noOfPuzzleItems == this.noOfPuzzleItems);
+          other.noOfPuzzleItems == this.noOfPuzzleItems &&
+          other.completedPuzzles == this.completedPuzzles &&
+          other.difficultyLevel == this.difficultyLevel);
 }
 
 class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
@@ -767,6 +838,8 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
   final Value<int?> durationInSeconds;
   final Value<int?> lengthOfCharacters;
   final Value<int?> noOfPuzzleItems;
+  final Value<int?> completedPuzzles;
+  final Value<double?> difficultyLevel;
   const PuzzlesTableCompanion({
     this.id = const Value.absent(),
     this.createdAt = const Value.absent(),
@@ -776,6 +849,8 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
     this.durationInSeconds = const Value.absent(),
     this.lengthOfCharacters = const Value.absent(),
     this.noOfPuzzleItems = const Value.absent(),
+    this.completedPuzzles = const Value.absent(),
+    this.difficultyLevel = const Value.absent(),
   });
   PuzzlesTableCompanion.insert({
     this.id = const Value.absent(),
@@ -786,6 +861,8 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
     this.durationInSeconds = const Value.absent(),
     this.lengthOfCharacters = const Value.absent(),
     this.noOfPuzzleItems = const Value.absent(),
+    this.completedPuzzles = const Value.absent(),
+    this.difficultyLevel = const Value.absent(),
   });
   static Insertable<PuzzlesTableData> custom({
     Expression<int>? id,
@@ -796,6 +873,8 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
     Expression<int>? durationInSeconds,
     Expression<int>? lengthOfCharacters,
     Expression<int>? noOfPuzzleItems,
+    Expression<int>? completedPuzzles,
+    Expression<double>? difficultyLevel,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -807,6 +886,8 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
       if (lengthOfCharacters != null)
         'length_of_characters': lengthOfCharacters,
       if (noOfPuzzleItems != null) 'no_of_puzzle_items': noOfPuzzleItems,
+      if (completedPuzzles != null) 'completed_puzzles': completedPuzzles,
+      if (difficultyLevel != null) 'difficulty_level': difficultyLevel,
     });
   }
 
@@ -818,7 +899,9 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
       Value<int?>? puzzleId,
       Value<int?>? durationInSeconds,
       Value<int?>? lengthOfCharacters,
-      Value<int?>? noOfPuzzleItems}) {
+      Value<int?>? noOfPuzzleItems,
+      Value<int?>? completedPuzzles,
+      Value<double?>? difficultyLevel}) {
     return PuzzlesTableCompanion(
       id: id ?? this.id,
       createdAt: createdAt ?? this.createdAt,
@@ -828,6 +911,8 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
       durationInSeconds: durationInSeconds ?? this.durationInSeconds,
       lengthOfCharacters: lengthOfCharacters ?? this.lengthOfCharacters,
       noOfPuzzleItems: noOfPuzzleItems ?? this.noOfPuzzleItems,
+      completedPuzzles: completedPuzzles ?? this.completedPuzzles,
+      difficultyLevel: difficultyLevel ?? this.difficultyLevel,
     );
   }
 
@@ -858,6 +943,12 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
     if (noOfPuzzleItems.present) {
       map['no_of_puzzle_items'] = Variable<int>(noOfPuzzleItems.value);
     }
+    if (completedPuzzles.present) {
+      map['completed_puzzles'] = Variable<int>(completedPuzzles.value);
+    }
+    if (difficultyLevel.present) {
+      map['difficulty_level'] = Variable<double>(difficultyLevel.value);
+    }
     return map;
   }
 
@@ -871,7 +962,9 @@ class PuzzlesTableCompanion extends UpdateCompanion<PuzzlesTableData> {
           ..write('puzzleId: $puzzleId, ')
           ..write('durationInSeconds: $durationInSeconds, ')
           ..write('lengthOfCharacters: $lengthOfCharacters, ')
-          ..write('noOfPuzzleItems: $noOfPuzzleItems')
+          ..write('noOfPuzzleItems: $noOfPuzzleItems, ')
+          ..write('completedPuzzles: $completedPuzzles, ')
+          ..write('difficultyLevel: $difficultyLevel')
           ..write(')'))
         .toString();
   }

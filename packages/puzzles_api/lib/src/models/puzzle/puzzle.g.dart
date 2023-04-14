@@ -14,6 +14,8 @@ Puzzle _$PuzzleFromJson(Map<String, dynamic> json) => Puzzle(
       durationInSeconds: json['duration_in_seconds'] as int?,
       noOfPuzzleItems: json['no_of_puzzle_items'] as int?,
       completedAt: json['completed_at'] as String?,
+      completedPuzzles: json['completed_puzzles'] as int?,
+      difficultyLevel: (json['difficulty_level'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$PuzzleToJson(Puzzle instance) => <String, dynamic>{
@@ -24,4 +26,6 @@ Map<String, dynamic> _$PuzzleToJson(Puzzle instance) => <String, dynamic>{
       'length_of_characters': instance.lengthOfCharacters,
       'duration_in_seconds': instance.durationInSeconds,
       'no_of_puzzle_items': instance.noOfPuzzleItems,
+      'completed_puzzles': instance.completedPuzzles,
+      'difficulty_level': instance.difficultyLevel,
     };

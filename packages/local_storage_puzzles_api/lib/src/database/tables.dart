@@ -25,6 +25,12 @@ class PuzzlesTable extends Table {
 
   @JsonKey('no_of_puzzle_items')
   IntColumn get noOfPuzzleItems => integer().nullable()();
+
+  @JsonKey('completed_puzzles')
+  IntColumn get completedPuzzles => integer().nullable()();
+
+  @JsonKey('difficulty_level')
+  RealColumn get difficultyLevel => real().nullable()();
 }
 
 // PuzzlesItem Table

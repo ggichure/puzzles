@@ -21,15 +21,16 @@ part 'puzzle.g.dart';
 @JsonSerializable()
 class Puzzle extends Equatable {
   /// {@macro puzzle}
-  const Puzzle({
-    this.id,
-    this.puzzleType,
-    this.createdAt,
-    this.lengthOfCharacters,
-    this.durationInSeconds,
-    this.noOfPuzzleItems,
-    this.completedAt,
-  });
+  const Puzzle(
+      {this.id,
+      this.puzzleType,
+      this.createdAt,
+      this.lengthOfCharacters,
+      this.durationInSeconds,
+      this.noOfPuzzleItems,
+      this.completedAt,
+      this.completedPuzzles,
+      this.difficultyLevel});
 
   /// puzzle primary key
   final int? id;
@@ -59,6 +60,14 @@ class Puzzle extends Equatable {
   @JsonKey(name: 'no_of_puzzle_items')
   final int? noOfPuzzleItems;
 
+  /// Holds user defined no_of_completed_items
+  @JsonKey(name: 'completed_puzzles')
+  final int? completedPuzzles;
+
+  /// Holds the difficulty level
+  @JsonKey(name: 'difficulty_level')
+  final double? difficultyLevel;
+
   /// Deserializes the given [JsonMap] into a [Puzzle].
   static Puzzle fromJson(JsonMap json) => _$PuzzleFromJson(json);
 
@@ -74,6 +83,8 @@ class Puzzle extends Equatable {
     int? lengthOfCharacters,
     int? durationInSeconds,
     int? noOfPuzzleItems,
+    int? completedPuzzles,
+    double? difficultyLevel,
   }) {
     return Puzzle(
       id: id ?? this.id,
@@ -83,6 +94,8 @@ class Puzzle extends Equatable {
       lengthOfCharacters: lengthOfCharacters ?? this.lengthOfCharacters,
       durationInSeconds: durationInSeconds ?? this.durationInSeconds,
       noOfPuzzleItems: noOfPuzzleItems ?? this.noOfPuzzleItems,
+      completedPuzzles: completedPuzzles ?? this.completedPuzzles,
+      difficultyLevel: difficultyLevel ?? this.difficultyLevel,
     );
   }
 
@@ -90,5 +103,15 @@ class Puzzle extends Equatable {
 
   // ignore: public_member_api_docs
   @override
-  List<Object?> get props => [id, puzzleType, createdAt, completedAt];
+  List<Object?> get props => [
+        id,
+        puzzleType,
+        createdAt,
+        completedAt,
+        noOfPuzzleItems,
+        durationInSeconds,
+        lengthOfCharacters,
+        completedPuzzles,
+        difficultyLevel
+      ];
 }
