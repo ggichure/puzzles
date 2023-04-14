@@ -4,6 +4,7 @@ import 'package:puzzles/home/view/view.dart';
 import 'package:puzzles/puzzles/puzzles.dart';
 import 'package:puzzles/puzzles/views/letter_puzzles/letter_puzzles_play_page.dart';
 import 'package:puzzles/puzzles/views/puzzles_history_page.dart';
+import 'package:puzzles_api/puzzles_api.dart';
 part 'app_router.gr.dart';
 
 @MaterialAutoRouter(

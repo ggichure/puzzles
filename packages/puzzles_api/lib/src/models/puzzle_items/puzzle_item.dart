@@ -7,7 +7,8 @@ part 'puzzle_item.g.dart';
 /// {@template puzzle_item}
 /// A single `puzzle_item` .
 ///
-/// Contains a [puzzleType], [createdAt],[puzzleId] ,[choices ]and [completedAt]
+/// Contains a [puzzleType], [createdAt],[puzzleId] ,[choices], [isCorrect]
+///  [isSimilar], and [completedAt]
 ///
 /// If an [id] is provided, it cannot be empty. If no [id] is provided, one
 /// will be generated.
@@ -28,6 +29,8 @@ class PuzzleItem extends Equatable {
     this.puzzleType,
     this.createdAt,
     this.completedAt,
+    this.isCorrect,
+    this.isSimilar,
   });
 
   /// puzzle_item primary key
@@ -52,6 +55,15 @@ class PuzzleItem extends Equatable {
   @JsonKey(name: 'completed_at')
   final String? completedAt;
 
+  /// whether the selected value is correct.
+//
+  @JsonKey(name: 'is_correct')
+  final bool? isCorrect;
+
+  /// whether [choices] are similar
+  @JsonKey(name: 'is_similar')
+  final bool? isSimilar;
+
   /// Deserializes the given [JsonMap] into a [PuzzleItem].
   static PuzzleItem fromJson(JsonMap json) => _$PuzzleItemFromJson(json);
 
@@ -66,6 +78,8 @@ class PuzzleItem extends Equatable {
     String? puzzleType,
     String? createdAt,
     String? completedAt,
+    bool? isCorrect,
+    bool? isSimilar,
   }) {
     return PuzzleItem(
       id: id ?? this.id,
@@ -74,6 +88,8 @@ class PuzzleItem extends Equatable {
       puzzleType: puzzleType ?? this.puzzleType,
       createdAt: createdAt ?? this.createdAt,
       completedAt: completedAt ?? this.completedAt,
+      isCorrect: isCorrect ?? this.isCorrect,
+      isSimilar: isSimilar ?? this.isSimilar,
     );
   }
 
@@ -86,6 +102,8 @@ class PuzzleItem extends Equatable {
       puzzleType,
       createdAt,
       completedAt,
+      isCorrect,
+      isSimilar
     ];
   }
 }

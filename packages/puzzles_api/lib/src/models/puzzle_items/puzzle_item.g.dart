@@ -14,6 +14,8 @@ PuzzleItem _$PuzzleItemFromJson(Map<String, dynamic> json) => PuzzleItem(
       puzzleType: json['puzzle_type'] as String?,
       createdAt: json['created_at'] as String?,
       completedAt: json['completed_at'] as String?,
+      isCorrect: json['is_correct'] as bool?,
+      isSimilar: json['is_similar'] as bool?,
     );
 
 Map<String, dynamic> _$PuzzleItemToJson(PuzzleItem instance) =>
@@ -24,4 +26,6 @@ Map<String, dynamic> _$PuzzleItemToJson(PuzzleItem instance) =>
       'puzzle_type': instance.puzzleType,
       'created_at': instance.createdAt,
       'completed_at': instance.completedAt,
+      'is_correct': instance.isCorrect,
+      'is_similar': instance.isSimilar,
     };

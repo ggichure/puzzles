@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:puzzles/l10n/l10n.dart';
 import 'package:puzzles/puzzles/blocs/puzzle_item_crud/puzzle_item_crud_bloc.dart';
 import 'package:puzzles/puzzles/views/letter_puzzles/blocs/letter_puzzle_items_generator/letter_puzzle_items_generator_bloc.dart';
+import 'package:puzzles/puzzles/views/letter_puzzles/widgets/widgets.dart';
 import 'package:puzzles_api/puzzles_api.dart';
 import 'package:puzzles_repository/puzzles_repository.dart';
 import 'package:words_generator_repository/words_generator_repository.dart';
@@ -89,7 +90,7 @@ class LetterPuzzlesPlayView extends StatelessWidget {
               if (state is PuzzleItemCrudError) {
                 return SliverToBoxAdapter(
                   child: TextButton(
-                    child: Text(l10n.errorText),
+                    child: Text('${l10n.errorText} :${state.errorMessage}'),
                     onPressed: () {
                       generatePuzzleItem(context);
                     },
@@ -107,7 +108,13 @@ class LetterPuzzlesPlayView extends StatelessWidget {
                       ),
                     );
                   }
-                  if (state is LetterPuzzleItemsGeneratorSuccess) {}
+                  if (state is LetterPuzzleItemsGeneratorSuccess) {
+                    return SliverToBoxAdapter(
+                      child: PuzzlesComparisonWidget(
+                        puzzleItem: state.puzzleItem,
+                      ),
+                    );
+                  }
                   return SliverToBoxAdapter(
                     child: TextButton(
                       child: Text(l10n.tryAgainText),

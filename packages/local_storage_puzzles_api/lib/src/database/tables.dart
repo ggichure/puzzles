@@ -41,4 +41,10 @@ class PuzzlesItemTable extends Table {
       text().map(const ListStringConverter()).nullable()();
   @JsonKey('puzzle_id')
   IntColumn get puzzleId => integer().nullable()();
+
+  @JsonKey('is_correct')
+  BoolColumn get isCorrect => boolean().nullable()();
+
+  @JsonKey('is_similar')
+  BoolColumn get isSimilar => boolean().nullable()();
 }

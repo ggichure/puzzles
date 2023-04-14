@@ -42,6 +42,18 @@ class _$AppRouter extends RootStackRouter {
         opaque: true,
       );
     },
+    LettersPuzzlesPlayPageRoute.name: (routeData) {
+      final args = routeData.argsAs<LettersPuzzlesPlayPageRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: LettersPuzzlesPlayPage(
+          key: args.key,
+          puzzle: args.puzzle,
+          completed: args.completed,
+        ),
+        opaque: true,
+      );
+    },
   };
 
   @override
@@ -57,6 +69,10 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           PuzzlesHistoryPageRoute.name,
           path: '/puzzles-history-page',
+        ),
+        RouteConfig(
+          LettersPuzzlesPlayPageRoute.name,
+          path: '/letters-puzzles-play-page',
         ),
       ];
 }
@@ -117,5 +133,45 @@ class PuzzlesHistoryPageRouteArgs {
   @override
   String toString() {
     return 'PuzzlesHistoryPageRouteArgs{key: $key, puzzleType: $puzzleType}';
+  }
+}
+
+/// generated route for
+/// [LettersPuzzlesPlayPage]
+class LettersPuzzlesPlayPageRoute
+    extends PageRouteInfo<LettersPuzzlesPlayPageRouteArgs> {
+  LettersPuzzlesPlayPageRoute({
+    Key? key,
+    required Puzzle? puzzle,
+    bool? completed,
+  }) : super(
+          LettersPuzzlesPlayPageRoute.name,
+          path: '/letters-puzzles-play-page',
+          args: LettersPuzzlesPlayPageRouteArgs(
+            key: key,
+            puzzle: puzzle,
+            completed: completed,
+          ),
+        );
+
+  static const String name = 'LettersPuzzlesPlayPageRoute';
+}
+
+class LettersPuzzlesPlayPageRouteArgs {
+  const LettersPuzzlesPlayPageRouteArgs({
+    this.key,
+    required this.puzzle,
+    this.completed,
+  });
+
+  final Key? key;
+
+  final Puzzle? puzzle;
+
+  final bool? completed;
+
+  @override
+  String toString() {
+    return 'LettersPuzzlesPlayPageRouteArgs{key: $key, puzzle: $puzzle, completed: $completed}';
   }
 }

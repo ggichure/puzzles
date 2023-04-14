@@ -22,6 +22,11 @@ class LetterPuzzleItemsGeneratorBloc extends Bloc<
           LetterPuzzleItemsGeneratorSuccess(
             PuzzleItem(
               choices: choices,
+              // use isSimilar to hold if the two straings match each other
+              isSimilar: choices.first.toLowerCase().contains(
+                    choices[1].toLowerCase(),
+                  ),
+
               createdAt: DateTime.now().toIso8601String(),
               puzzleId: event.puzzle?.id,
               puzzleType: event.puzzle?.puzzleType,

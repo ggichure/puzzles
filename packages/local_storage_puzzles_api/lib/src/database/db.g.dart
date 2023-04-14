@@ -50,9 +50,41 @@ class $PuzzlesItemTableTable extends PuzzlesItemTable
   late final GeneratedColumn<int> puzzleId = GeneratedColumn<int>(
       'puzzle_id', aliasedName, true,
       type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _isCorrectMeta =
+      const VerificationMeta('isCorrect');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, createdAt, completedAt, puzzleType, choices, puzzleId];
+  late final GeneratedColumn<bool> isCorrect =
+      GeneratedColumn<bool>('is_correct', aliasedName, true,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
+            SqlDialect.sqlite: 'CHECK ("is_correct" IN (0, 1))',
+            SqlDialect.mysql: '',
+            SqlDialect.postgres: '',
+          }));
+  static const VerificationMeta _isSimilarMeta =
+      const VerificationMeta('isSimilar');
+  @override
+  late final GeneratedColumn<bool> isSimilar =
+      GeneratedColumn<bool>('is_similar', aliasedName, true,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintsDependsOnDialect({
+            SqlDialect.sqlite: 'CHECK ("is_similar" IN (0, 1))',
+            SqlDialect.mysql: '',
+            SqlDialect.postgres: '',
+          }));
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        createdAt,
+        completedAt,
+        puzzleType,
+        choices,
+        puzzleId,
+        isCorrect,
+        isSimilar
+      ];
   @override
   String get aliasedName => _alias ?? 'puzzles_item_table';
   @override
@@ -87,6 +119,14 @@ class $PuzzlesItemTableTable extends PuzzlesItemTable
       context.handle(_puzzleIdMeta,
           puzzleId.isAcceptableOrUnknown(data['puzzle_id']!, _puzzleIdMeta));
     }
+    if (data.containsKey('is_correct')) {
+      context.handle(_isCorrectMeta,
+          isCorrect.isAcceptableOrUnknown(data['is_correct']!, _isCorrectMeta));
+    }
+    if (data.containsKey('is_similar')) {
+      context.handle(_isSimilarMeta,
+          isSimilar.isAcceptableOrUnknown(data['is_similar']!, _isSimilarMeta));
+    }
     return context;
   }
 
@@ -109,6 +149,10 @@ class $PuzzlesItemTableTable extends PuzzlesItemTable
               .read(DriftSqlType.string, data['${effectivePrefix}choices'])),
       puzzleId: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}puzzle_id']),
+      isCorrect: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_correct']),
+      isSimilar: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_similar']),
     );
   }
 
@@ -131,13 +175,17 @@ class PuzzlesItemTableData extends DataClass
   final String? puzzleType;
   final List<String>? choices;
   final int? puzzleId;
+  final bool? isCorrect;
+  final bool? isSimilar;
   const PuzzlesItemTableData(
       {this.id,
       this.createdAt,
       this.completedAt,
       this.puzzleType,
       this.choices,
-      this.puzzleId});
+      this.puzzleId,
+      this.isCorrect,
+      this.isSimilar});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -160,6 +208,12 @@ class PuzzlesItemTableData extends DataClass
     if (!nullToAbsent || puzzleId != null) {
       map['puzzle_id'] = Variable<int>(puzzleId);
     }
+    if (!nullToAbsent || isCorrect != null) {
+      map['is_correct'] = Variable<bool>(isCorrect);
+    }
+    if (!nullToAbsent || isSimilar != null) {
+      map['is_similar'] = Variable<bool>(isSimilar);
+    }
     return map;
   }
 
@@ -181,6 +235,12 @@ class PuzzlesItemTableData extends DataClass
       puzzleId: puzzleId == null && nullToAbsent
           ? const Value.absent()
           : Value(puzzleId),
+      isCorrect: isCorrect == null && nullToAbsent
+          ? const Value.absent()
+          : Value(isCorrect),
+      isSimilar: isSimilar == null && nullToAbsent
+          ? const Value.absent()
+          : Value(isSimilar),
     );
   }
 
@@ -194,6 +254,8 @@ class PuzzlesItemTableData extends DataClass
       puzzleType: serializer.fromJson<String?>(json['puzzle_type']),
       choices: serializer.fromJson<List<String>?>(json['choices']),
       puzzleId: serializer.fromJson<int?>(json['puzzle_id']),
+      isCorrect: serializer.fromJson<bool?>(json['is_correct']),
+      isSimilar: serializer.fromJson<bool?>(json['is_similar']),
     );
   }
   @override
@@ -206,6 +268,8 @@ class PuzzlesItemTableData extends DataClass
       'puzzle_type': serializer.toJson<String?>(puzzleType),
       'choices': serializer.toJson<List<String>?>(choices),
       'puzzle_id': serializer.toJson<int?>(puzzleId),
+      'is_correct': serializer.toJson<bool?>(isCorrect),
+      'is_similar': serializer.toJson<bool?>(isSimilar),
     };
   }
 
@@ -215,7 +279,9 @@ class PuzzlesItemTableData extends DataClass
           Value<String?> completedAt = const Value.absent(),
           Value<String?> puzzleType = const Value.absent(),
           Value<List<String>?> choices = const Value.absent(),
-          Value<int?> puzzleId = const Value.absent()}) =>
+          Value<int?> puzzleId = const Value.absent(),
+          Value<bool?> isCorrect = const Value.absent(),
+          Value<bool?> isSimilar = const Value.absent()}) =>
       PuzzlesItemTableData(
         id: id.present ? id.value : this.id,
         createdAt: createdAt.present ? createdAt.value : this.createdAt,
@@ -223,6 +289,8 @@ class PuzzlesItemTableData extends DataClass
         puzzleType: puzzleType.present ? puzzleType.value : this.puzzleType,
         choices: choices.present ? choices.value : this.choices,
         puzzleId: puzzleId.present ? puzzleId.value : this.puzzleId,
+        isCorrect: isCorrect.present ? isCorrect.value : this.isCorrect,
+        isSimilar: isSimilar.present ? isSimilar.value : this.isSimilar,
       );
   @override
   String toString() {
@@ -232,14 +300,16 @@ class PuzzlesItemTableData extends DataClass
           ..write('completedAt: $completedAt, ')
           ..write('puzzleType: $puzzleType, ')
           ..write('choices: $choices, ')
-          ..write('puzzleId: $puzzleId')
+          ..write('puzzleId: $puzzleId, ')
+          ..write('isCorrect: $isCorrect, ')
+          ..write('isSimilar: $isSimilar')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, createdAt, completedAt, puzzleType, choices, puzzleId);
+  int get hashCode => Object.hash(id, createdAt, completedAt, puzzleType,
+      choices, puzzleId, isCorrect, isSimilar);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -249,7 +319,9 @@ class PuzzlesItemTableData extends DataClass
           other.completedAt == this.completedAt &&
           other.puzzleType == this.puzzleType &&
           other.choices == this.choices &&
-          other.puzzleId == this.puzzleId);
+          other.puzzleId == this.puzzleId &&
+          other.isCorrect == this.isCorrect &&
+          other.isSimilar == this.isSimilar);
 }
 
 class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
@@ -259,6 +331,8 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
   final Value<String?> puzzleType;
   final Value<List<String>?> choices;
   final Value<int?> puzzleId;
+  final Value<bool?> isCorrect;
+  final Value<bool?> isSimilar;
   const PuzzlesItemTableCompanion({
     this.id = const Value.absent(),
     this.createdAt = const Value.absent(),
@@ -266,6 +340,8 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
     this.puzzleType = const Value.absent(),
     this.choices = const Value.absent(),
     this.puzzleId = const Value.absent(),
+    this.isCorrect = const Value.absent(),
+    this.isSimilar = const Value.absent(),
   });
   PuzzlesItemTableCompanion.insert({
     this.id = const Value.absent(),
@@ -274,6 +350,8 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
     this.puzzleType = const Value.absent(),
     this.choices = const Value.absent(),
     this.puzzleId = const Value.absent(),
+    this.isCorrect = const Value.absent(),
+    this.isSimilar = const Value.absent(),
   });
   static Insertable<PuzzlesItemTableData> custom({
     Expression<int>? id,
@@ -282,6 +360,8 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
     Expression<String>? puzzleType,
     Expression<String>? choices,
     Expression<int>? puzzleId,
+    Expression<bool>? isCorrect,
+    Expression<bool>? isSimilar,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -290,6 +370,8 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
       if (puzzleType != null) 'puzzle_type': puzzleType,
       if (choices != null) 'choices': choices,
       if (puzzleId != null) 'puzzle_id': puzzleId,
+      if (isCorrect != null) 'is_correct': isCorrect,
+      if (isSimilar != null) 'is_similar': isSimilar,
     });
   }
 
@@ -299,7 +381,9 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
       Value<String?>? completedAt,
       Value<String?>? puzzleType,
       Value<List<String>?>? choices,
-      Value<int?>? puzzleId}) {
+      Value<int?>? puzzleId,
+      Value<bool?>? isCorrect,
+      Value<bool?>? isSimilar}) {
     return PuzzlesItemTableCompanion(
       id: id ?? this.id,
       createdAt: createdAt ?? this.createdAt,
@@ -307,6 +391,8 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
       puzzleType: puzzleType ?? this.puzzleType,
       choices: choices ?? this.choices,
       puzzleId: puzzleId ?? this.puzzleId,
+      isCorrect: isCorrect ?? this.isCorrect,
+      isSimilar: isSimilar ?? this.isSimilar,
     );
   }
 
@@ -332,6 +418,12 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
     if (puzzleId.present) {
       map['puzzle_id'] = Variable<int>(puzzleId.value);
     }
+    if (isCorrect.present) {
+      map['is_correct'] = Variable<bool>(isCorrect.value);
+    }
+    if (isSimilar.present) {
+      map['is_similar'] = Variable<bool>(isSimilar.value);
+    }
     return map;
   }
 
@@ -343,7 +435,9 @@ class PuzzlesItemTableCompanion extends UpdateCompanion<PuzzlesItemTableData> {
           ..write('completedAt: $completedAt, ')
           ..write('puzzleType: $puzzleType, ')
           ..write('choices: $choices, ')
-          ..write('puzzleId: $puzzleId')
+          ..write('puzzleId: $puzzleId, ')
+          ..write('isCorrect: $isCorrect, ')
+          ..write('isSimilar: $isSimilar')
           ..write(')'))
         .toString();
   }

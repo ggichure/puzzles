@@ -31,5 +31,13 @@
     "errorText": "Error",
     "@errorText": {
         "description": "Text shown for when there is an error"
+    },
+    "similarText": "Similar",
+    "@similarText": {
+        "description": "Text shown for when items are similar"
+    },
+    "notSimilarText": "Not Similar",
+    "@notSimilarText": {
+        "description": "Text shown for when items are not similar"
     }
 }
